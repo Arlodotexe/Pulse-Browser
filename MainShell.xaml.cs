@@ -22,13 +22,24 @@ using Windows.UI.Xaml.Navigation;
 namespace Pulse_Browser
 {
     /// <summary>
+    /// ViewModel for MainShell
+    /// </summary>
+    public class MainShellViewModel : ViewModelBase
+    {
+        public ObservableCollection<TabViewItem> Tabs { get; set; }
+    }
+
+    /// <summary>
     /// Main app shell
     /// </summary>
     public sealed partial class MainShell : Page
     {
+        public MainShellViewModel ViewModel => DataContext as MainShellViewModel;
+
         public MainShell()
         {
-            this.InitializeComponent();
+            InitializeComponent();
+            DataContextChanged += (s, e) => this.Bindings.Update();
         }
     }
 }

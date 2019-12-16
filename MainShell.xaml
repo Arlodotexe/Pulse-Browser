@@ -23,7 +23,7 @@
     </Page.Resources>
 
     <Grid>
-        <controls:TabView Style="{StaticResource TabViewWithTabBelowFooterTemplate}" CanCloseTabs="True" >
+        <controls:TabView Style="{StaticResource TabViewWithTabBelowFooterTemplate}" CanCloseTabs="True" ItemsSource="{x:Bind ViewModel.Tabs, Mode=OneWay}">
         </controls:TabView>
     </Grid>
 </Page>
