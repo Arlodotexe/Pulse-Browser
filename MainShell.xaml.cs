@@ -1,5 +1,9 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight;
+using Microsoft.Toolkit.Uwp.UI.Controls;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -18,11 +22,11 @@ using Windows.UI.Xaml.Navigation;
 namespace Pulse_Browser
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// Main app shell
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class MainShell : Page
     {
-        public MainPage()
+        public MainShell()
         {
             this.InitializeComponent();
         }
