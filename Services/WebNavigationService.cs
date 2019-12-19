@@ -67,13 +67,16 @@ namespace Pulse_Browser.Services
 
         public static void Back()
         {
-            var previousVisited = WebHistoryStack.ElementAtOrDefault(1);
-            if (previousVisited != null)
+            var validNavigationStack = WebHistoryStack
+                // Don't include navigations where the page was refreshed or navigated back, they could result in showing the same page again
+                .Where(e => e.NavigationType == HistoryNavigationType.Direct || e.NavigationType == HistoryNavigationType.Forward);
+
+            if (validNavigationStack?.ElementAtOrDefault(1) != null)
             {
                 WebHistoryStack.Push(new WebHistoryEntry()
                 {
                     VisitedAt = DateTime.Now,
-                    Uri = previousVisited.Uri,
+                    Uri = validNavigationStack?.ElementAtOrDefault(1).Uri,
                     NavigationType = HistoryNavigationType.Back
                 });
             }
