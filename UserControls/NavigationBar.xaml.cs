@@ -32,7 +32,7 @@ namespace Pulse_Browser.UserControls
             set { SetValue(BackButtonEnabledProperty, value); }
         }
 
-        public DependencyProperty BackButtonEnabledProperty = DependencyProperty.Register(
+        private DependencyProperty BackButtonEnabledProperty = DependencyProperty.Register(
           "BackButtonEnabled",
           typeof(bool),
           typeof(bool),
@@ -45,7 +45,7 @@ namespace Pulse_Browser.UserControls
             set { SetValue(ForwardButtonEnabledProperty, value); }
         }
 
-        public DependencyProperty ForwardButtonEnabledProperty = DependencyProperty.Register(
+        private DependencyProperty ForwardButtonEnabledProperty = DependencyProperty.Register(
           "ForwardButtonEnabled",
           typeof(bool),
           typeof(bool),

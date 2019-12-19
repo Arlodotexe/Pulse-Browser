@@ -17,7 +17,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <usercontrols:NavigationBar />
+        <usercontrols:NavigationBar BackButtonEnabled="{x:Bind AppWebView.CanGoBack, Mode=OneWay}" ForwardButtonEnabled="{x:Bind AppWebView.CanGoForward, Mode=OneWay}" />
 
         <Grid Grid.Row="1">
             <Frame Loaded="AppFrame_Loaded" x:Name="AppFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
