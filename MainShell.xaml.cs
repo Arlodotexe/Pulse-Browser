@@ -93,14 +93,5 @@ namespace Pulse_Browser
         {
             ViewModel.CurrentAddress = address;
         }
-
-        private void AppFrame_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            if (!(sender is Frame fromFrame)) return;
-
-            if (fromFrame is null) return;
-
-            fromFrame.Navigate(typeof(Views.HomePage));
-        }
     }
 }
