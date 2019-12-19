@@ -54,18 +54,14 @@ namespace Pulse_Browser
             DataContextChanged += (s, e) => this.Bindings.Update();
 
             SetupDefaultViewModel();
+            
+            // Navigate to the default address so it's in the navigation stack
+            Services.WebNavigationService.Navigate(ViewModel.CurrentAddress);
+
             SetupWebNavigationEvents();
 
             AppWebView.NavigationStarting += AppWebView_NavigationStarting;
             AppWebView.NavigationFailed += AppWebView_NavigationFailed;
-            AppWebView.NavigationCompleted += AppWebView_NavigationCompleted;
-        }
-
-        private void AppWebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
-        {
-            if (!(sender is WebView webView)) return;
-            ViewModel.BackButtonEnabled = webView.CanGoBack;
-            ViewModel.ForwardButtonEnabled = webView.CanGoForward;
         }
 
         private void AppWebView_NavigationFailed(object sender, WebViewNavigationFailedEventArgs e) => InterceptHomePage(e.Uri);
@@ -97,7 +93,12 @@ namespace Pulse_Browser
             Services.WebNavigationService.RefreshRequested += WebNavigationService_RefreshRequested;
             Services.WebNavigationService.BackRequested += WebNavigationService_BackRequested;
             Services.WebNavigationService.ForwardRequested += WebNavigationService_ForwardRequested;
+            Services.WebNavigationService.CanGoForwardChanged += WebNavigationService_CanGoForwardChanged;
+            Services.WebNavigationService.CanGoBackChanged += WebNavigationService_CanGoBackChanged;
         }
+
+        private void WebNavigationService_CanGoBackChanged(bool canGoBack) => ViewModel.BackButtonEnabled = canGoBack;
+        private void WebNavigationService_CanGoForwardChanged(bool canGoForward) => ViewModel.ForwardButtonEnabled = canGoForward;
 
         private void WebNavigationService_ForwardRequested(Uri address)
         {
