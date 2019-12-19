@@ -14,7 +14,6 @@ namespace Pulse_Browser
         private Uri currentAddress = new Uri("about:home");
         private bool webViewShown = false;
         private bool backButtonEnabled = false;
-        private bool forwardButtonEnabled = false;
 
         public Uri CurrentAddress
         {
@@ -32,12 +31,6 @@ namespace Pulse_Browser
         {
             get => backButtonEnabled;
             set => Set(() => BackButtonEnabled, ref backButtonEnabled, value);
-        }
-
-        public bool ForwardButtonEnabled
-        {
-            get => forwardButtonEnabled;
-            set => Set(() => ForwardButtonEnabled, ref forwardButtonEnabled, value);
         }
     }
 
