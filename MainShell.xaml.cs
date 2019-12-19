@@ -86,6 +86,8 @@ namespace Pulse_Browser
         {
             if (!(sender is Frame fromFrame)) return;
 
+            if (fromFrame is null) return;
+
             fromFrame.Navigate(typeof(Views.HomePage));
         }
     }
