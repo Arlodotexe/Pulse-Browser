@@ -28,7 +28,16 @@ namespace Pulse_Browser.Services
         public delegate void ForwardRequestedEvent();
         public static event ForwardRequestedEvent ForwardRequested;
 
-        public static void Navigate(Uri address) => NavigationRequested?.Invoke(address);
+        public static void Navigate(Uri address)
+        {
+            WebHistory.Push(new WebHistoryEntry()
+            {
+                Uri = address,
+                VisitedAt = DateTime.Now
+            });
+
+            NavigationRequested?.Invoke(address);
+        }
 
         public static void Refresh() => RefreshRequested?.Invoke();
 
