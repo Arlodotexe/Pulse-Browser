@@ -44,6 +44,7 @@ namespace Pulse_Browser
 
         private void NavigationService_NavigationRequested(Uri address)
         {
+            ViewModel.WebViewShown = true;
             ViewModel.CurrentAddress = address;
         }
     }
