@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pulse_Browser.Services
 {
-    public static class NavigationService
+    public static class WebNavigationService
     {
         public delegate void OnNavigatedEvent(Uri address);
         public static event OnNavigatedEvent NavigationRequested;

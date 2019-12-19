@@ -34,19 +34,19 @@ namespace Pulse_Browser.UserControls
 
                 if (isUri)
                 {
-                    Services.NavigationService.Navigate(destination);
+                    Services.WebNavigationService.Navigate(destination);
                 }
                 else
                 {
                     Uri searchAddress = new Uri($"https://www.google.com/search?q={HttpUtility.UrlEncode(args.QueryText)}");
-                    Services.NavigationService.Navigate(searchAddress);
+                    Services.WebNavigationService.Navigate(searchAddress);
                 }
             }
         }
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
-            Services.NavigationService.Navigate(new Uri("about:home"));
+            Services.WebNavigationService.Navigate(new Uri("about:home"));
         }
 
         private void SettingsMenuFlyoutItem_Click(object sender, RoutedEventArgs e)
