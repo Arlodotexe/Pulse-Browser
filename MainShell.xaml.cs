@@ -11,7 +11,7 @@ namespace Pulse_Browser
     /// </summary>
     public class MainShellViewModel : ViewModelBase
     {
-        private Uri currentAddress;
+        private Uri currentAddress = new Uri("about:home");
         private bool webViewShown = false;
 
         public Uri CurrentAddress
