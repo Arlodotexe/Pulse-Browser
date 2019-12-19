@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,6 +25,32 @@ namespace Pulse_Browser.UserControls
         {
             this.InitializeComponent();
         }
+
+        public bool BackButtonEnabled
+        {
+            get { return (bool)GetValue(BackButtonEnabledProperty); }
+            set { SetValue(BackButtonEnabledProperty, value); }
+        }
+
+        public DependencyProperty BackButtonEnabledProperty = DependencyProperty.Register(
+          "BackButtonEnabled",
+          typeof(bool),
+          typeof(bool),
+          new PropertyMetadata(null)
+        );
+
+        public bool ForwardButtonEnabled
+        {
+            get { return (bool)GetValue(ForwardButtonEnabledProperty); }
+            set { SetValue(ForwardButtonEnabledProperty, value); }
+        }
+
+        public DependencyProperty ForwardButtonEnabledProperty = DependencyProperty.Register(
+          "ForwardButtonEnabled",
+          typeof(bool),
+          typeof(bool),
+          new PropertyMetadata(null)
+        );
 
         private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
