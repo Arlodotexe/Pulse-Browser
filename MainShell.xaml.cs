@@ -26,7 +26,7 @@ namespace Pulse_Browser
     /// </summary>
     public class MainShellViewModel : ViewModelBase
     {
-        public ObservableCollection<TabViewItem> Tabs { get; set; }
+
     }
 
     /// <summary>
@@ -41,5 +41,7 @@ namespace Pulse_Browser
             InitializeComponent();
             DataContextChanged += (s, e) => this.Bindings.Update();
         }
+
+
     }
 }
