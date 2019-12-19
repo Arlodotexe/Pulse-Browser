@@ -72,6 +72,11 @@ namespace Pulse_Browser
 
         private void AppWebView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args) => InterceptHomePage(args.Uri);
 
+        /// <summary>
+        /// Checks Uri for home page and sets up the ViewModel appropriately
+        /// </summary>
+        /// <param name="uri">Uri to check</param>
+        /// <returns>True if found, otherwise false</returns>
         private bool InterceptHomePage(Uri uri)
         {
             switch (uri?.ToString())
