@@ -303,6 +303,26 @@
 
         <Button Width="40" Height="40" Grid.Column="6" Style="{StaticResource TransparentSquareButton}">
             <FontIcon FontSize="16" FontFamily="Segoe MDL2 Assets" Glyph="&#xE10C;" />
+            <Button.Flyout>
+                <MenuFlyout>
+
+                    <MenuFlyoutItem Click="HistoryMenuFlyoutItem_Click">
+                        <MenuFlyoutItem.Icon>
+                            <FontIcon Glyph="&#xE81C;" FontFamily="Segoe MDL2 Assets" />
+                        </MenuFlyoutItem.Icon>
+                        <MenuFlyoutItem.KeyboardAccelerators>
+                            <KeyboardAccelerator Key="H" Modifiers="Control"/>
+                        </MenuFlyoutItem.KeyboardAccelerators>
+                    </MenuFlyoutItem>
+
+                    <MenuFlyoutItem Click="SettingsMenuFlyoutItem_Click">
+                        <MenuFlyoutItem.Icon>
+                            <FontIcon Glyph="&#xE713;" FontFamily="Segoe MDL2 Assets" />
+                        </MenuFlyoutItem.Icon>
+                    </MenuFlyoutItem>
+                </MenuFlyout>
+                
+            </Button.Flyout>
         </Button>
 
     </Grid>

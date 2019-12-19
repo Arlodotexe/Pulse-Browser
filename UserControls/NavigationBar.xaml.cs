@@ -48,5 +48,15 @@ namespace Pulse_Browser.UserControls
         {
             Services.NavigationService.Navigate(new Uri("about:home"));
         }
+
+        private void SettingsMenuFlyoutItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void HistoryMenuFlyoutItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
