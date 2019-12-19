@@ -31,10 +31,10 @@ namespace Pulse_Browser.Services
         public delegate void RefreshRequestedEvent();
         public static event RefreshRequestedEvent RefreshRequested;
 
-        public delegate void BackRequestedEvent();
+        public delegate void BackRequestedEvent(Uri address);
         public static event BackRequestedEvent BackRequested;
 
-        public delegate void ForwardRequestedEvent();
+        public delegate void ForwardRequestedEvent(Uri address);
         public static event ForwardRequestedEvent ForwardRequested;
 
         public static void Navigate(Uri address)
@@ -71,17 +71,17 @@ namespace Pulse_Browser.Services
                 // Don't include navigations where the page was refreshed or navigated back, they could result in showing the same page again
                 .Where(e => e.NavigationType == HistoryNavigationType.Direct || e.NavigationType == HistoryNavigationType.Forward);
 
-            if (validNavigationStack?.ElementAtOrDefault(1) != null)
+            var backHistoryEntry = validNavigationStack.ElementAtOrDefault(1);
+            if (backHistoryEntry != null)
             {
                 WebHistoryStack.Push(new WebHistoryEntry()
                 {
                     VisitedAt = DateTime.Now,
-                    Uri = validNavigationStack?.ElementAtOrDefault(1).Uri,
+                    Uri = backHistoryEntry.Uri,
                     NavigationType = HistoryNavigationType.Back
                 });
+                BackRequested?.Invoke(backHistoryEntry.Uri);
             }
-
-            BackRequested?.Invoke();
         }
 
         public static void Forward()
@@ -99,9 +99,8 @@ namespace Pulse_Browser.Services
                     Uri = previousVisited.Uri,
                     NavigationType = HistoryNavigationType.Forward
                 });
+                ForwardRequested?.Invoke(previousVisited.Uri);
             }
-
-            ForwardRequested?.Invoke();
         }
     }
 }

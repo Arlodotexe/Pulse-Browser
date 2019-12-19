@@ -94,12 +94,12 @@ namespace Pulse_Browser
             Services.WebNavigationService.ForwardRequested += WebNavigationService_ForwardRequested;
         }
 
-        private void WebNavigationService_ForwardRequested()
+        private void WebNavigationService_ForwardRequested(Uri address)
         {
             if (AppWebView.CanGoForward) AppWebView.GoForward();
         }
 
-        private void WebNavigationService_BackRequested()
+        private void WebNavigationService_BackRequested(Uri address)
         {
             if (AppWebView.CanGoBack) AppWebView.GoBack();
         }
