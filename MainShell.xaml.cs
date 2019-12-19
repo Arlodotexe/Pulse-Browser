@@ -55,8 +55,17 @@ namespace Pulse_Browser
 
             SetupDefaultViewModel();
             SetupWebNavigationEvents();
+
             AppWebView.NavigationStarting += AppWebView_NavigationStarting;
             AppWebView.NavigationFailed += AppWebView_NavigationFailed;
+            AppWebView.NavigationCompleted += AppWebView_NavigationCompleted;
+        }
+
+        private void AppWebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        {
+            if (!(sender is WebView webView)) return;
+            ViewModel.BackButtonEnabled = webView.CanGoBack;
+            ViewModel.ForwardButtonEnabled = webView.CanGoForward;
         }
 
         private void AppWebView_NavigationFailed(object sender, WebViewNavigationFailedEventArgs e) => InterceptHomePage(e.Uri);
