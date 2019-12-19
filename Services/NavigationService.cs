@@ -8,6 +8,12 @@ namespace Pulse_Browser.Services
 {
     public static class NavigationService
     {
-        
+        public delegate void OnNavigatedEvent(Uri address);
+        public static event OnNavigatedEvent NavigationRequested;
+
+        public static void Navigation(Uri address)
+        {
+            NavigationRequested?.Invoke(address);
+        }
     }
 }

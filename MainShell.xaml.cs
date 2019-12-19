@@ -39,8 +39,12 @@ namespace Pulse_Browser
         {
             InitializeComponent();
             DataContextChanged += (s, e) => this.Bindings.Update();
+            Services.NavigationService.NavigationRequested += NavigationService_NavigationRequested;
         }
 
-
+        private void NavigationService_NavigationRequested(Uri address)
+        {
+            ViewModel.CurrentAddress = address;
+        }
     }
 }
