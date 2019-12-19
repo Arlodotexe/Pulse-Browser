@@ -6,9 +6,46 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignHeight="40"
+    d:DesignWidth="800">
 
-    <Grid>
+    <Grid Height="40" Background="{ThemeResource SystemControlBackgroundAltMediumBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Button Height="40">
+            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE0C4;" />
+        </Button>
+        
+        <Button Height="40" Grid.Column="1">
+            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE0AB;" />
+        </Button>
+        
+        <Button Height="40" Grid.Column="2">
+            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72C;" />
+        </Button>
+        
+        <Button Height="40" Grid.Column="3">
+            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE80F;" />
+        </Button>
+
+        <AutoSuggestBox Grid.Column="4" PlaceholderText="Search or enter a web address" VerticalAlignment="Center" Margin="5,0,5,0" />
+
+
+        <Button Height="40" Grid.Column="5">
+            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE728;" />
+        </Button>
+
+        <Button Height="40" Grid.Column="6">
+            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE10C;" />
+        </Button>
+
     </Grid>
 </UserControl>
