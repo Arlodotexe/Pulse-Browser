@@ -13,7 +13,7 @@
                 <Setter Property="Foreground" Value="{ThemeResource ButtonForeground}" />
                 <Setter Property="BorderBrush" Value="{contract5Present:ThemeResource ButtonRevealBorderBrush}" />
                 <Setter Property="BorderThickness"
-                        Value="{ThemeResource ButtonBorderThemeThickness}" />
+                        Value="1" />
                 <Setter Property="Padding"
                         Value="8,4,8,4" />
                 <Setter Property="HorizontalAlignment"
@@ -33,7 +33,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
-                            <Border x:Name="RootGrid" CornerRadius="1" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" >
+                            <Border x:Name="RootGrid" CornerRadius="0" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" >
                                 <VisualStateManager.VisualStateGroups>
                                     <contract5Present:VisualStateGroup x:Name="CommonStates">
                                         <VisualState x:Name="Normal">
