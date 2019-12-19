@@ -39,7 +39,20 @@ namespace Pulse_Browser.Services
             NavigationRequested?.Invoke(address);
         }
 
-        public static void Refresh() => RefreshRequested?.Invoke();
+        public static void Refresh()
+        {
+            var lastVisited = WebHistory.Peek();
+            if (lastVisited != null)
+            {
+                WebHistory.Push(new WebHistoryEntry()
+                {
+                    VisitedAt = DateTime.Now,
+                    Uri = lastVisited.Uri
+                });
+            }
+
+            RefreshRequested?.Invoke();
+        }
 
         public static void Back() => BackRequested?.Invoke();
 
