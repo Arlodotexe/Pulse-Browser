@@ -86,7 +86,11 @@ namespace Pulse_Browser.Services
 
         public static void Forward()
         {
-            var previousVisited = WebHistoryStack.ElementAtOrDefault(1);
+            var validNavigationStack = WebHistoryStack
+                // We can only navigate forward if there has been back navigation
+                .Where(e => e.NavigationType == HistoryNavigationType.Back);
+
+            var previousVisited = validNavigationStack.ElementAtOrDefault(1);
             if (previousVisited != null)
             {
                 WebHistoryStack.Push(new WebHistoryEntry()
