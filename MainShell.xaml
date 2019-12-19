@@ -6,9 +6,16 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:usercontrols="using:Pulse_Browser.UserControls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
+
+        <WebView Grid.Row="1" x:Load="{x:Bind ViewModel.WebViewShown}" x:Name="MainWebView" Source="{x:Bind ViewModel.CurrentAddress}" />
     </Grid>
 </Page>
