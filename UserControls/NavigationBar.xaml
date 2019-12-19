@@ -290,7 +290,7 @@
             <FontIcon FontSize="16" FontFamily="Segoe MDL2 Assets" Glyph="&#xE72C;" />
         </Button>
 
-        <Button Width="40" Height="40" Grid.Column="3" Style="{StaticResource TransparentSquareButton}">
+        <Button Width="40" Height="40" Grid.Column="3" Style="{StaticResource TransparentSquareButton}" Click="HomeButton_Click">
             <FontIcon FontSize="16" FontFamily="Segoe MDL2 Assets" Glyph="&#xE80F;" />
         </Button>
 

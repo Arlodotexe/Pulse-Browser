@@ -52,7 +52,15 @@ namespace Pulse_Browser
 
         private void NavigationService_NavigationRequested(Uri address)
         {
-            ViewModel.WebViewShown = true;
+            if (address.ToString() == "about:home")
+            {
+                ViewModel.WebViewShown = false;
+                AppFrame.Navigate(typeof(Views.HomePage));
+            }
+            else
+            {
+                ViewModel.WebViewShown = true;
+            }
             ViewModel.CurrentAddress = address;
         }
 

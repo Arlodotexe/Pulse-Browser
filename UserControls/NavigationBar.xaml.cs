@@ -43,5 +43,10 @@ namespace Pulse_Browser.UserControls
                 }
             }
         }
+
+        private void HomeButton_Click(object sender, RoutedEventArgs e)
+        {
+            Services.NavigationService.Navigate(new Uri("about:home"));
+        }
     }
 }
