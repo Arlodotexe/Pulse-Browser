@@ -7,8 +7,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:usercontrols="using:Pulse_Browser.UserControls"
+    xmlns:helpers="using:Pulse_Browser.Helpers"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
@@ -17,6 +19,6 @@
 
         <usercontrols:NavigationBar />
 
-        <WebView Grid.Row="1" x:Load="{x:Bind ViewModel.WebViewShown}" x:Name="MainWebView" Source="{x:Bind ViewModel.CurrentAddress}" />
+        <WebView Grid.Row="1" Visibility="{x:Bind helpers:Converters.BooleanToVisibility(ViewModel.WebViewShown), Mode=OneWay}" Source="{x:Bind ViewModel.CurrentAddress, Mode=TwoWay}" />
     </Grid>
 </Page>
