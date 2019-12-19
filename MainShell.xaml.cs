@@ -72,17 +72,17 @@ namespace Pulse_Browser
 
         private void AppWebView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args) => InterceptHomePage(args.Uri);
 
-        private void InterceptHomePage(Uri uri)
+        private bool InterceptHomePage(Uri uri)
         {
             switch (uri?.ToString())
             {
                 case "about:home":
                     ViewModel.WebViewShown = false;
                     AppFrame.Navigate(typeof(Views.HomePage));
-                    break;
+                    return true;
                 default:
                     ViewModel.WebViewShown = true;
-                    break;
+                    return false;
             }
         }
 
