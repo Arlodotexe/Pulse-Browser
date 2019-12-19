@@ -21,30 +21,30 @@
         </Grid.ColumnDefinitions>
 
         <Button Height="40" Style="{StaticResource TransparentSquareButton}">
-            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE0C4;" />
+            <FontIcon FontSize="16" FontFamily="Segoe MDL2 Assets" Glyph="&#xE0C4;" />
         </Button>
 
         <Button Height="40" Grid.Column="1" Style="{StaticResource TransparentSquareButton}">
-            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE0AB;" />
+            <FontIcon FontSize="16" FontFamily="Segoe MDL2 Assets" Glyph="&#xE0AB;" />
         </Button>
 
         <Button Height="40" Grid.Column="2" Style="{StaticResource TransparentSquareButton}">
-            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72C;" />
+            <FontIcon FontSize="16" FontFamily="Segoe MDL2 Assets" Glyph="&#xE72C;" />
         </Button>
 
         <Button Height="40" Grid.Column="3" Style="{StaticResource TransparentSquareButton}">
-            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE80F;" />
+            <FontIcon FontSize="16" FontFamily="Segoe MDL2 Assets" Glyph="&#xE80F;" />
         </Button>
 
         <AutoSuggestBox Grid.Column="4" PlaceholderText="Search or enter a web address" VerticalAlignment="Center" Margin="5,0,5,0" />
 
 
         <Button Height="40" Grid.Column="5" Style="{StaticResource TransparentSquareButton}">
-            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE728;" />
+            <FontIcon FontSize="16" FontFamily="Segoe MDL2 Assets" Glyph="&#xE728;" />
         </Button>
 
         <Button Height="40" Grid.Column="6" Style="{StaticResource TransparentSquareButton}">
-            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE10C;" />
+            <FontIcon FontSize="16" FontFamily="Segoe MDL2 Assets" Glyph="&#xE10C;" />
         </Button>
 
     </Grid>
