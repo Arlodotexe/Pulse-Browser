@@ -54,7 +54,20 @@ namespace Pulse_Browser.Services
             RefreshRequested?.Invoke();
         }
 
-        public static void Back() => BackRequested?.Invoke();
+        public static void Back()
+        {
+            var previousVisited = WebHistory.ElementAtOrDefault(1);
+            if (previousVisited != null)
+            {
+                WebHistory.Push(new WebHistoryEntry()
+                {
+                    VisitedAt = DateTime.Now,
+                    Uri = previousVisited.Uri
+                });
+            }
+
+            BackRequested?.Invoke();
+        }
 
         public static void Forward() => ForwardRequested?.Invoke();
     }
