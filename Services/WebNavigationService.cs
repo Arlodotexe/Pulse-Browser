@@ -14,7 +14,11 @@ namespace Pulse_Browser.Services
             public Uri Uri { get; set; }
         }
 
-        public static Stack<WebHistoryEntry> WebHistory { get; set; } = new Stack<WebHistoryEntry>();
+
+        /// <summary>
+        /// Represents the full web history, complete with forward, backward, and refresh navigation entries
+        /// </summary>
+        public static Stack<WebHistoryEntry> WebHistoryStack { get; set; } = new Stack<WebHistoryEntry>();
 
         public delegate void OnNavigatedEvent(Uri address);
         public static event OnNavigatedEvent NavigationRequested;
@@ -30,7 +34,7 @@ namespace Pulse_Browser.Services
 
         public static void Navigate(Uri address)
         {
-            WebHistory.Push(new WebHistoryEntry()
+            WebHistoryStack.Push(new WebHistoryEntry()
             {
                 Uri = address,
                 VisitedAt = DateTime.Now
@@ -41,10 +45,10 @@ namespace Pulse_Browser.Services
 
         public static void Refresh()
         {
-            var lastVisited = WebHistory.Peek();
+            var lastVisited = WebHistoryStack.Peek();
             if (lastVisited != null)
             {
-                WebHistory.Push(new WebHistoryEntry()
+                WebHistoryStack.Push(new WebHistoryEntry()
                 {
                     VisitedAt = DateTime.Now,
                     Uri = lastVisited.Uri
@@ -56,10 +60,10 @@ namespace Pulse_Browser.Services
 
         public static void Back()
         {
-            var previousVisited = WebHistory.ElementAtOrDefault(1);
+            var previousVisited = WebHistoryStack.ElementAtOrDefault(1);
             if (previousVisited != null)
             {
-                WebHistory.Push(new WebHistoryEntry()
+                WebHistoryStack.Push(new WebHistoryEntry()
                 {
                     VisitedAt = DateTime.Now,
                     Uri = previousVisited.Uri
@@ -69,6 +73,20 @@ namespace Pulse_Browser.Services
             BackRequested?.Invoke();
         }
 
-        public static void Forward() => ForwardRequested?.Invoke();
+        public static void Forward()
+        {
+
+            var previousVisited = WebHistoryStack.ElementAtOrDefault(1);
+            if (previousVisited != null)
+            {
+                WebHistoryStack.Push(new WebHistoryEntry()
+                {
+                    VisitedAt = DateTime.Now,
+                    Uri = previousVisited.Uri
+                });
+            }
+
+            ForwardRequested?.Invoke();
+        }
     }
 }
