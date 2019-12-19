@@ -84,7 +84,7 @@ namespace Pulse_Browser
 
         private void AppFrame_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            Frame fromFrame = sender as Frame;
+            if (!(sender is Frame fromFrame)) return;
 
             fromFrame.Navigate(typeof(Views.HomePage));
         }
