@@ -8,6 +8,14 @@ namespace Pulse_Browser.Services
 {
     public static class WebNavigationService
     {
+        public class WebHistoryEntry
+        {
+            public DateTime VisitedAt { get; set; }
+            public Uri Uri { get; set; }
+        }
+
+        public static Stack<WebHistoryEntry> WebHistory { get; set; } = new Stack<WebHistoryEntry>();
+
         public delegate void OnNavigatedEvent(Uri address);
         public static event OnNavigatedEvent NavigationRequested;
 
