@@ -41,6 +41,7 @@ namespace Pulse_Browser
             DataContextChanged += (s, e) => this.Bindings.Update();
 
             SetupDefaultViewModel();
+            SetupWebNavigationEvents();
             AppWebView.NavigationStarting += AppWebView_NavigationStarting;
         }
 
