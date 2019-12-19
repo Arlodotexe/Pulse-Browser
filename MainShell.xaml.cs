@@ -13,6 +13,7 @@ namespace Pulse_Browser
     {
         private Uri currentAddress = new Uri("about:home");
         private bool webViewShown = false;
+        private bool backButtonEnabled = false;
 
         public Uri CurrentAddress
         {
@@ -26,6 +27,11 @@ namespace Pulse_Browser
             set => Set(() => this.WebViewShown, ref webViewShown, value);
         }
 
+        public bool BackButtonEnabled
+        {
+            get => backButtonEnabled;
+            set => Set(() => BackButtonEnabled, ref backButtonEnabled, value);
+        }
     }
 
     /// <summary>
