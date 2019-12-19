@@ -12,8 +12,13 @@ namespace Pulse_Browser.Services
         {
             public DateTime VisitedAt { get; set; }
             public Uri Uri { get; set; }
+            public HistoryNavigationType NavigationType { get; set; }
         }
 
+        public enum HistoryNavigationType
+        {
+            Direct, Refresh, Back, Forward
+        }
 
         /// <summary>
         /// Represents the full web history, complete with forward, backward, and refresh navigation entries
@@ -37,7 +42,8 @@ namespace Pulse_Browser.Services
             WebHistoryStack.Push(new WebHistoryEntry()
             {
                 Uri = address,
-                VisitedAt = DateTime.Now
+                VisitedAt = DateTime.Now,
+                NavigationType = HistoryNavigationType.Direct
             });
 
             NavigationRequested?.Invoke(address);
@@ -51,7 +57,8 @@ namespace Pulse_Browser.Services
                 WebHistoryStack.Push(new WebHistoryEntry()
                 {
                     VisitedAt = DateTime.Now,
-                    Uri = lastVisited.Uri
+                    Uri = lastVisited.Uri,
+                    NavigationType = HistoryNavigationType.Refresh
                 });
             }
 
@@ -66,7 +73,8 @@ namespace Pulse_Browser.Services
                 WebHistoryStack.Push(new WebHistoryEntry()
                 {
                     VisitedAt = DateTime.Now,
-                    Uri = previousVisited.Uri
+                    Uri = previousVisited.Uri,
+                    NavigationType = HistoryNavigationType.Back
                 });
             }
 
@@ -75,14 +83,14 @@ namespace Pulse_Browser.Services
 
         public static void Forward()
         {
-
             var previousVisited = WebHistoryStack.ElementAtOrDefault(1);
             if (previousVisited != null)
             {
                 WebHistoryStack.Push(new WebHistoryEntry()
                 {
                     VisitedAt = DateTime.Now,
-                    Uri = previousVisited.Uri
+                    Uri = previousVisited.Uri,
+                    NavigationType = HistoryNavigationType.Forward
                 });
             }
 
