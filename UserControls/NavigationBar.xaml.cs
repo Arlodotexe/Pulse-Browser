@@ -34,12 +34,12 @@ namespace Pulse_Browser.UserControls
 
                 if (isUri)
                 {
-                    Services.NavigationService.Navigation(destination);
+                    Services.NavigationService.Navigate(destination);
                 }
                 else
                 {
                     Uri searchAddress = new Uri($"https://www.google.com/search?q={HttpUtility.UrlEncode(args.QueryText)}");
-                    Services.NavigationService.Navigation(searchAddress);
+                    Services.NavigationService.Navigate(searchAddress);
                 }
             }
         }

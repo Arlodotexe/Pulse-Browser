@@ -11,7 +11,7 @@ namespace Pulse_Browser.Services
         public delegate void OnNavigatedEvent(Uri address);
         public static event OnNavigatedEvent NavigationRequested;
 
-        public static void Navigation(Uri address)
+        public static void Navigate(Uri address)
         {
             NavigationRequested?.Invoke(address);
         }
