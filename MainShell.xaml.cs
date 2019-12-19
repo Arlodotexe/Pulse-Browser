@@ -101,11 +101,13 @@ namespace Pulse_Browser
 
         private void WebNavigationService_ForwardRequested(Uri address)
         {
+            if (InterceptHomePage(address)) return;
             if (AppWebView.CanGoForward) AppWebView.GoForward();
         }
 
         private void WebNavigationService_BackRequested(Uri address)
         {
+            if (InterceptHomePage(address)) return;
             if (AppWebView.CanGoBack) AppWebView.GoBack();
         }
 
