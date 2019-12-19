@@ -58,5 +58,10 @@ namespace Pulse_Browser.UserControls
         {
 
         }
+
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            Services.WebNavigationService.Refresh();
+        }
     }
 }

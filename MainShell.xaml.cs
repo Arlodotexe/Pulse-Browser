@@ -42,7 +42,17 @@ namespace Pulse_Browser
 
             SetupDefaultViewModel();
 
+        }
+
+        public void SetupWebNavigationEvents()
+        {
             Services.WebNavigationService.NavigationRequested += NavigationService_NavigationRequested;
+            Services.WebNavigationService.RefreshRequested += WebNavigationService_RefreshRequested;
+        }
+
+        private void WebNavigationService_RefreshRequested()
+        {
+            AppWebView.Refresh();
         }
 
         private void SetupDefaultViewModel()

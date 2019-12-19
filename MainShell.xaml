@@ -21,7 +21,7 @@
 
         <Grid Grid.Row="1">
             <Frame Loaded="AppFrame_Loaded" x:Name="AppFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-            <WebView Visibility="{x:Bind helpers:Converters.BooleanToVisibility(ViewModel.WebViewShown), Mode=OneWay}" Source="{x:Bind ViewModel.CurrentAddress, Mode=TwoWay}" />
+            <WebView x:Name="AppWebView" Visibility="{x:Bind helpers:Converters.BooleanToVisibility(ViewModel.WebViewShown), Mode=OneWay}" Source="{x:Bind ViewModel.CurrentAddress, Mode=TwoWay}" />
         </Grid>
     </Grid>
 </Page>
