@@ -55,5 +55,12 @@ namespace Pulse_Browser
             ViewModel.WebViewShown = true;
             ViewModel.CurrentAddress = address;
         }
+
+        private void AppFrame_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Frame fromFrame = sender as Frame;
+
+            fromFrame.Navigate(typeof(Views.HomePage));
+        }
     }
 }
