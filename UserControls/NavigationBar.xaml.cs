@@ -68,5 +68,10 @@ namespace Pulse_Browser.UserControls
         {
             Services.WebNavigationService.Back();
         }
+
+        private void ForwardButton_Click(object sender, RoutedEventArgs e)
+        {
+            Services.WebNavigationService.Forward();
+        }
     }
 }

@@ -49,11 +49,17 @@ namespace Pulse_Browser
             Services.WebNavigationService.NavigationRequested += NavigationService_NavigationRequested;
             Services.WebNavigationService.RefreshRequested += WebNavigationService_RefreshRequested;
             Services.WebNavigationService.BackRequested += WebNavigationService_BackRequested;
+            Services.WebNavigationService.ForwardRequested += WebNavigationService_ForwardRequested;
+        }
+
+        private void WebNavigationService_ForwardRequested()
+        {
+            if (AppWebView.CanGoForward) AppWebView.GoForward();
         }
 
         private void WebNavigationService_BackRequested()
         {
-            if(AppWebView.CanGoBack) AppWebView.GoBack();
+            if (AppWebView.CanGoBack) AppWebView.GoBack();
         }
 
         private void WebNavigationService_RefreshRequested()
