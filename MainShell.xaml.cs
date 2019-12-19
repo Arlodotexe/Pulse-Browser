@@ -43,11 +43,16 @@ namespace Pulse_Browser
             SetupDefaultViewModel();
             SetupWebNavigationEvents();
             AppWebView.NavigationStarting += AppWebView_NavigationStarting;
+            AppWebView.NavigationFailed += AppWebView_NavigationFailed;
         }
 
-        private void AppWebView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
+        private void AppWebView_NavigationFailed(object sender, WebViewNavigationFailedEventArgs e) => InterceptHomePage(e.Uri);
+
+        private void AppWebView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args) => InterceptHomePage(args.Uri);
+
+        private void InterceptHomePage(Uri uri)
         {
-            switch (args.Uri?.ToString())
+            switch (uri?.ToString())
             {
                 case "about:home":
                     ViewModel.WebViewShown = false;
@@ -77,11 +82,17 @@ namespace Pulse_Browser
             if (AppWebView.CanGoBack) AppWebView.GoBack();
         }
 
-        private void WebNavigationService_RefreshRequested() => AppWebView.Refresh();
+        private void WebNavigationService_RefreshRequested()
+        {
+            if (ViewModel.WebViewShown) AppWebView.Refresh();
+        }
 
         private void SetupDefaultViewModel() => DataContext = new MainShellViewModel();
 
-        private void NavigationService_NavigationRequested(Uri address) => ViewModel.CurrentAddress = address;
+        private void NavigationService_NavigationRequested(Uri address)
+        {
+            ViewModel.CurrentAddress = address;
+        }
 
         private void AppFrame_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
