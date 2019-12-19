@@ -20,8 +20,8 @@
         <usercontrols:NavigationBar />
 
         <Grid Grid.Row="1">
-            <WebView Visibility="{x:Bind helpers:Converters.BooleanToVisibility(ViewModel.WebViewShown), Mode=OneWay}" Source="{x:Bind ViewModel.CurrentAddress, Mode=TwoWay}" />
             <Frame Loaded="AppFrame_Loaded" x:Name="AppFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            <WebView Visibility="{x:Bind helpers:Converters.BooleanToVisibility(ViewModel.WebViewShown), Mode=OneWay}" Source="{x:Bind ViewModel.CurrentAddress, Mode=TwoWay}" />
         </Grid>
     </Grid>
 </Page>
