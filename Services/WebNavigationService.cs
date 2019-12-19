@@ -14,11 +14,13 @@ namespace Pulse_Browser.Services
         public delegate void RefreshRequestedEvent();
         public static event RefreshRequestedEvent RefreshRequested;
 
-        public static void Navigate(Uri address)
-        {
-            NavigationRequested?.Invoke(address);
-        }
+        public delegate void BackRequestedEvent();
+        public static event BackRequestedEvent BackRequested;
+
+        public static void Navigate(Uri address) => NavigationRequested?.Invoke(address);
 
         public static void Refresh() => RefreshRequested?.Invoke();
+
+        public static void Back() => BackRequested?.Invoke();
     }
 }
