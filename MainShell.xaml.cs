@@ -46,7 +46,7 @@ namespace Pulse_Browser
 
         private void AppWebView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
         {
-            switch(args.Uri?.ToString())
+            switch (args.Uri?.ToString())
             {
                 case "about:home":
                     ViewModel.WebViewShown = false;
@@ -76,20 +76,11 @@ namespace Pulse_Browser
             if (AppWebView.CanGoBack) AppWebView.GoBack();
         }
 
-        private void WebNavigationService_RefreshRequested()
-        {
-            AppWebView.Refresh();
-        }
+        private void WebNavigationService_RefreshRequested() => AppWebView.Refresh();
 
-        private void SetupDefaultViewModel()
-        {
-            DataContext = new MainShellViewModel();
-        }
+        private void SetupDefaultViewModel() => DataContext = new MainShellViewModel();
 
-        private void NavigationService_NavigationRequested(Uri address)
-        {
-            ViewModel.CurrentAddress = address;
-        }
+        private void NavigationService_NavigationRequested(Uri address) => ViewModel.CurrentAddress = address;
 
         private void AppFrame_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
