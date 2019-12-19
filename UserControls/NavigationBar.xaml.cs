@@ -63,5 +63,10 @@ namespace Pulse_Browser.UserControls
         {
             Services.WebNavigationService.Refresh();
         }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            Services.WebNavigationService.Back();
+        }
     }
 }

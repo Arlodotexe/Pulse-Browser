@@ -278,7 +278,7 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <Button Width="40" Height="40" Style="{StaticResource TransparentSquareButton}">
+        <Button Width="40" Height="40" Style="{StaticResource TransparentSquareButton}" Click="BackButton_Click">
             <FontIcon FontSize="16" FontFamily="Segoe MDL2 Assets" Glyph="&#xE0C4;" />
         </Button>
 

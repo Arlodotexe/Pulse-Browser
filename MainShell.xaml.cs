@@ -48,6 +48,12 @@ namespace Pulse_Browser
         {
             Services.WebNavigationService.NavigationRequested += NavigationService_NavigationRequested;
             Services.WebNavigationService.RefreshRequested += WebNavigationService_RefreshRequested;
+            Services.WebNavigationService.BackRequested += WebNavigationService_BackRequested;
+        }
+
+        private void WebNavigationService_BackRequested()
+        {
+            if(AppWebView.CanGoBack) AppWebView.GoBack();
         }
 
         private void WebNavigationService_RefreshRequested()
