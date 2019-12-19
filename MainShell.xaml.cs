@@ -39,7 +39,15 @@ namespace Pulse_Browser
         {
             InitializeComponent();
             DataContextChanged += (s, e) => this.Bindings.Update();
+
+            SetupDefaultViewModel();
+
             Services.NavigationService.NavigationRequested += NavigationService_NavigationRequested;
+        }
+
+        private void SetupDefaultViewModel()
+        {
+            DataContext = new MainShellViewModel();
         }
 
         private void NavigationService_NavigationRequested(Uri address)
