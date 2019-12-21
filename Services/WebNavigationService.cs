@@ -12,16 +12,10 @@ namespace Pulse_Browser.Services
         {
             public DateTime VisitedAt { get; set; }
             public Uri Uri { get; set; }
-            public HistoryNavigationType NavigationType { get; set; }
             /// <summary>
             /// Marker indicating that this is the current active page
             /// </summary>
             public bool Current { get; set; } = false;
-        }
-
-        public enum HistoryNavigationType
-        {
-            Direct, Refresh, Back, Forward
         }
 
         /// <summary>
@@ -56,7 +50,6 @@ namespace Pulse_Browser.Services
             {
                 Uri = address,
                 VisitedAt = DateTime.Now,
-                NavigationType = HistoryNavigationType.Direct,
                 Current = true
             });
 
@@ -68,17 +61,6 @@ namespace Pulse_Browser.Services
 
         public static void Refresh()
         {
-            var lastVisited = WebHistoryStack.Peek();
-            if (lastVisited != null)
-            {
-                WebHistoryStack.Push(new WebHistoryEntry()
-                {
-                    VisitedAt = DateTime.Now,
-                    Uri = lastVisited.Uri,
-                    NavigationType = HistoryNavigationType.Refresh
-                });
-            }
-
             RefreshRequested?.Invoke();
         }
 
@@ -90,12 +72,6 @@ namespace Pulse_Browser.Services
             var validNavigationStack = WebHistoryStack
                 // Transform to list so we don't affect the original stack
                 ?.ToList();
-            validNavigationStack = validNavigationStack
-                // Don't include navigations where the page was refreshed, they could result in showing the same page again
-                ?.Where(e => e.NavigationType == HistoryNavigationType.Direct || e.NavigationType == HistoryNavigationType.Forward || e.NavigationType == HistoryNavigationType.Back)
-                // Convert it back to an array so we can iterate through it properly
-                ?.ToList();
-
 
             // Find the index of the current address in the valid history items
             int currentIndex_validStack = validNavigationStack.FindLastIndex(h => h.Current);
@@ -115,22 +91,10 @@ namespace Pulse_Browser.Services
             WebHistoryStack.First(h => h.VisitedAt == newEntry.VisitedAt).Current = true;
             int newHistoryItemIndexOnStack = WebHistoryStack.ToList().FindIndex(h => h.VisitedAt == newEntry.VisitedAt);
 
-            // Remove this new entry so we can correctly count the number of further valid history items
-            validNavigationStack.Remove(newEntry);
-
-
             if (validNavigationStack != null)
             {
                 CanGoBackChanged?.Invoke(newHistoryItemIndexOnStack + 1 < WebHistoryStack.Count());
                 CanGoForwardChanged?.Invoke(true);
-
-
-                WebHistoryStack.Push(new WebHistoryEntry()
-                {
-                    VisitedAt = DateTime.Now,
-                    Uri = newEntry.Uri,
-                    NavigationType = HistoryNavigationType.Back
-                });
 
                 BackRequested?.Invoke(newEntry.Uri);
             }
@@ -142,44 +106,33 @@ namespace Pulse_Browser.Services
 
             int currentIndex = WebHistoryStack.ToList().IndexOf(currentEntry);
 
-            // If the current index isn't the last one in the stack, adjust the index to include the currentEntry
-            if (currentIndex != WebHistoryStack.Count() - 1)
-            {
-                currentIndex += 1;
-            }
-
             var validNavigationStack = WebHistoryStack
                 // Transform to list so we don't affect the original stack
-                ?.ToList()
-                // Get all items preceding the current item, including current
-                ?.GetRange(0, currentIndex)
-                // Don't include navigations where the page was refreshed or navigated back, they could result in showing the same page again
-                ?.Where(e => e.NavigationType == HistoryNavigationType.Back || e.NavigationType == HistoryNavigationType.Direct)
-                // Convert it back to an array so we can iterate through it properly
                 ?.ToList();
 
+            // Find the index of the current address in the valid history items
+            int currentIndex_validStack = validNavigationStack.FindIndex(h => h.VisitedAt == currentEntry.VisitedAt);
 
-            // Reverse it to get the item that was closest to the currentEntry
-            validNavigationStack.Reverse();
+            var newEntry = validNavigationStack.ElementAtOrDefault(currentIndex_validStack - 1);
+            if (newEntry is null)
+            {
+                // We can't go forward, the UI should reflect that
+                CanGoForwardChanged?.Invoke(false);
+                // And the code shouldn't try.
+                return;
+            }
 
-            var newEntry = validNavigationStack.ElementAtOrDefault(0);
-            // Remove this new entry so we can correctly count the number of further valid history items
-            validNavigationStack.Remove(newEntry);
+            foreach (var h in WebHistoryStack) h.Current = false;
+
+            // This is the entry we're navigating to, so it should be marked as current
+            WebHistoryStack.First(h => h.VisitedAt == newEntry.VisitedAt).Current = true;
 
             if (newEntry != null)
             {
                 CanGoBackChanged?.Invoke(true);
-                CanGoForwardChanged?.Invoke(currentIndex != WebHistoryStack.Count() - 1);
+                // If there is something else at the front of the stack, we can navigate forward to it
+                CanGoForwardChanged?.Invoke(currentIndex_validStack - 1 > 0);
 
-                foreach (var h in WebHistoryStack) h.Current = false;
-
-                WebHistoryStack.Push(new WebHistoryEntry()
-                {
-                    VisitedAt = DateTime.Now,
-                    Uri = newEntry.Uri,
-                    NavigationType = HistoryNavigationType.Forward,
-                    Current = true
-                });
                 ForwardRequested?.Invoke(newEntry.Uri);
             }
         }
