@@ -301,11 +301,11 @@
             <FontIcon FontSize="16" FontFamily="Segoe MDL2 Assets" Glyph="&#xE728;" />
         </Button>
 
-        <Button Width="40" Height="40" Grid.Column="6" Style="{StaticResource TransparentSquareButton}">
+        <Button Width="40" Height="40" Grid.Column="6" Style="{StaticResource TransparentSquareButton}" Click="MoreMenuButton_Click">
             <FontIcon FontSize="16" FontFamily="Segoe MDL2 Assets" Glyph="&#xE10C;" />
-            <Button.Flyout>
-                <MenuFlyout>
 
+            <FlyoutBase.AttachedFlyout>
+                <MenuFlyout x:Name="MoreMenuFlyout">
                     <MenuFlyoutItem Width="250" Click="HistoryMenuFlyoutItem_Click" Text="History">
                         <MenuFlyoutItem.Icon>
                             <FontIcon Glyph="&#xE81C;" FontFamily="Segoe MDL2 Assets" />
@@ -321,8 +321,8 @@
                         </MenuFlyoutItem.Icon>
                     </MenuFlyoutItem>
                 </MenuFlyout>
-                
-            </Button.Flyout>
+            </FlyoutBase.AttachedFlyout>
+
         </Button>
 
     </Grid>

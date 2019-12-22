@@ -90,5 +90,10 @@ namespace Pulse_Browser.UserControls
         private void ForwardButton_Click(object sender, RoutedEventArgs e) => ForwardButtonClicked?.Invoke();
 
         private void FavoritesButton_Click(object sender, RoutedEventArgs e) => FavoritesMenuItemButtonClicked?.Invoke();
+
+        private void MoreMenuButton_Click(object sender, RoutedEventArgs e)
+        {
+            MoreMenuFlyout.ShowAt(sender as FrameworkElement, new FlyoutShowOptions() { Placement = FlyoutPlacementMode.BottomEdgeAlignedRight });
+        }
     }
 }
