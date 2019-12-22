@@ -8,6 +8,13 @@
     mc:Ignorable="d"
     d:DesignHeight="700"
     d:DesignWidth="550" Height="700">
+    <UserControl.Resources>
+        <ControlTemplate x:Name="ScrollViewerScrollBarlessTemplate" TargetType="ScrollViewer">
+            <Grid Background="{TemplateBinding Background}">
+                <ScrollContentPresenter x:Name="ScrollContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="{TemplateBinding Padding}"/>
+            </Grid>
+        </ControlTemplate>
+    </UserControl.Resources>
 
     <StackPanel>
         <Pivot Title="Options">
@@ -21,8 +28,9 @@
                     <TextBlock Text="{Binding}" FontSize="20" />
                 </DataTemplate>
             </Pivot.HeaderTemplate>
-            <PivotItem Header="History">
-                <local:History />
+            
+            <PivotItem Header="History" Background="Transparent">
+                    <local:History />
             </PivotItem>
             <PivotItem Header="Settings">
     
