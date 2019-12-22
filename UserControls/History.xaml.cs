@@ -20,9 +20,23 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Pulse_Browser.UserControls
 {
+    public class WebHistoryEntry : NavigationEntry
+    {
+        public WebHistoryEntry(NavigationEntry navigationEntry)
+        {
+            Current = navigationEntry.Current;
+            Kind = navigationEntry.Kind;
+            VisitedAt = navigationEntry.VisitedAt;
+            WebUri = navigationEntry.WebUri;
+            NativePageParam = navigationEntry.NativePageParam;
+            NativePageType = navigationEntry.NativePageType;
+        }
+
+        public Uri Favicon { get; set; }
+    }
     public class HistoryViewerViewModel : ViewModelBase
     {
-        public ObservableCollection<NavigationEntry> History = new ObservableCollection<NavigationEntry>();
+        public ObservableCollection<WebHistoryEntry> History = new ObservableCollection<WebHistoryEntry>();
     }
 
     public sealed partial class History : UserControl
@@ -31,13 +45,21 @@ namespace Pulse_Browser.UserControls
         {
             this.InitializeComponent();
             DataContextChanged += (s, e) => this.Bindings.Update();
+            DataContext = new HistoryViewerViewModel();
+
             PopulateHistoryView();
         }
 
         private void PopulateHistoryView()
         {
             // TODO: Instead of showing history from the current session and the current view, get saved entries from persistent storage
-            ViewModel.History = new ObservableCollection<NavigationEntry>(MainShell.CurrentInstance.CurrentNavigationService.HistoryStack.Where(h => h.Kind == NavigationPageType.Web));
+            var History = MainShell.CurrentInstance.CurrentNavigationService.HistoryStack;
+
+            // Convert full History class to WebHistory
+            // Filters out native navigation pages and add favicon
+            var WebHistory = History.Where(h => h.Kind == NavigationPageType.Web).Select(h => new WebHistoryEntry(h) { Favicon = new Uri($"http://www.google.com/s2/favicons?domain={h.WebUri.Host}") });
+
+            if (WebHistory != null) ViewModel.History = new ObservableCollection<WebHistoryEntry>(WebHistory);
         }
 
         public HistoryViewerViewModel ViewModel => DataContext as HistoryViewerViewModel;
