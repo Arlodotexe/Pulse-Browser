@@ -105,7 +105,7 @@ namespace Pulse_Browser
 
         private void NavigationBar_HistoryMenuFlyoutItemButtonClicked()
         {
-            Helpers.AppContentDialog.OpenDialog(new UserControls.History());
+            Helpers.AppContentDialog.OpenDialog(new UserControls.Options());
         }
     }
 }
