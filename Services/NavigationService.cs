@@ -92,6 +92,17 @@ namespace Pulse_Browser.Services
             NavigationRequested?.Invoke(newNavigationEntry);
         }
 
+        public void AddNewEntry(NavigationEntry navigationEntry)
+        {
+            if (navigationEntry.Current)
+            {
+                // If this is the current one, remove the current flag from all others
+                foreach (var h in HistoryStack) h.Current = false;
+            }
+
+            HistoryStack.Push(navigationEntry);
+        }
+
         public void Refresh()
         {
             RefreshRequested?.Invoke();

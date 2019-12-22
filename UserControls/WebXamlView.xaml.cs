@@ -94,5 +94,22 @@ namespace Pulse_Browser.UserControls
         private void NavigationService_RefreshRequested() => AppWebView.Refresh();
 
         private void NavigationService_NavigationRequested(Uri address) => ViewModel.CurrentWebAddress = address;
+
+        private void AppWebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        {
+            if (!args.IsSuccess) return;
+
+            // If the current item isn't a duplicate of the new item, push it
+            if (NavigationService.HistoryStack.ToList().FirstOrDefault(h => h.Current)?.WebUri != args.Uri)
+            {
+                NavigationService.AddNewEntry(new NavigationEntry()
+                {
+                    Kind = NavigationPageType.Web,
+                    WebUri = args.Uri,
+                    VisitedAt = DateTime.Now,
+                    Current = true
+                });
+            }
+        }
     }
 }
