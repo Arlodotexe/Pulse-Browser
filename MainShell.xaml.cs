@@ -108,9 +108,14 @@ namespace Pulse_Browser
             Helpers.AppContentDialog.OpenDialog(new UserControls.Options());
         }
 
-        private void NavigationBar_FavoritesMenuFlyoutItemButtonClicked()
+        private void NavigationBar_FavoritesMenuItemButtonClicked()
         {
             Helpers.AppContentDialog.OpenDialog(new UserControls.Options());
+        }
+
+        private void NavigationBar_SettingsMenuFlyoutItemButtonClicked()
+        {
+            Helpers.AppContentDialog.OpenDialog(new UserControls.Options(UserControls.Options.LandingTab.Settings));
         }
     }
 }
