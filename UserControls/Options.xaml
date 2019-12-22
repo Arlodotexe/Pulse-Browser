@@ -7,11 +7,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="700"
-    d:DesignWidth="550">
+    d:DesignWidth="550" Height="700">
 
-    <StackPanel Margin="20">
-        <TextBlock Text="Options" FontSize="28" />
-        <Pivot>
+    <StackPanel>
+        <Pivot Title="Options">
+            <Pivot.TitleTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" FontSize="28" FontWeight="SemiLight" />
+                </DataTemplate>
+            </Pivot.TitleTemplate>
             <Pivot.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding}" FontSize="20" />
