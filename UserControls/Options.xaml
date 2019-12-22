@@ -49,6 +49,10 @@
                                                Storyboard.TargetProperty="Background" >
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightTransparentBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                               Storyboard.TargetProperty="FontWeight" >
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Normal" />
+                                            </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="UnselectedLocked">
@@ -71,6 +75,10 @@
                                                Storyboard.TargetProperty="Foreground" >
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseHighBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                               Storyboard.TargetProperty="FontWeight" >
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="SemiBold" />
+                                            </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Grid"
                                                Storyboard.TargetProperty="Background" >
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemChromeAltHighColor}" />
@@ -82,6 +90,10 @@
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
                                                Storyboard.TargetProperty="Foreground">
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseMediumHighBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                               Storyboard.TargetProperty="FontWeight" >
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Normal" />
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Grid"
                                                Storyboard.TargetProperty="Background" >
@@ -134,7 +146,6 @@
             Margin="{TemplateBinding Padding}"
             FontSize="{TemplateBinding FontSize}"
             FontFamily="{TemplateBinding FontFamily}"
-            FontWeight="{TemplateBinding FontWeight}"
             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
             VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                                 <ContentPresenter.RenderTransform>
@@ -406,7 +417,7 @@
             </Pivot.TitleTemplate>
             <Pivot.HeaderTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding}" FontSize="20" />
+                    <TextBlock Text="{Binding}" FontSize="15" />
                 </DataTemplate>
             </Pivot.HeaderTemplate>
             
