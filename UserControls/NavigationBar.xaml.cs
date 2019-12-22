@@ -67,19 +67,18 @@ namespace Pulse_Browser.UserControls
         public event ForwardButtonClickedHandler ForwardButtonClicked;
         public delegate void ForwardButtonClickedHandler();
 
+        public event SettingsMenuFlyoutItemClickedHandler SettingsMenuFlyoutItemButtonClicked;
+        public delegate void SettingsMenuFlyoutItemClickedHandler();
+
+        public event HistoryMenuFlyoutItemClickedHandler HistoryMenuFlyoutItemButtonClicked;
+        public delegate void HistoryMenuFlyoutItemClickedHandler();
+
         private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) => NavigationQuerySubmitted?.Invoke(args.QueryText);
 
         private void HomeButton_Click(object sender, RoutedEventArgs e) => HomeButtonClicked?.Invoke();
 
-        private void SettingsMenuFlyoutItem_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void HistoryMenuFlyoutItem_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        private void SettingsMenuFlyoutItem_Click(object sender, RoutedEventArgs e) => SettingsMenuFlyoutItemButtonClicked?.Invoke();
+        private void HistoryMenuFlyoutItem_Click(object sender, RoutedEventArgs e) => HistoryMenuFlyoutItemButtonClicked?.Invoke();
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e) => RefreshButtonClicked?.Invoke();
 
