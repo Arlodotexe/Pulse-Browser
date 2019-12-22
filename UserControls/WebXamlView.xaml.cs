@@ -55,7 +55,7 @@ namespace Pulse_Browser.UserControls
             DataContextChanged += (s, e) => this.Bindings.Update();
 
             // Navigate to the default address so it's in the navigation stack
-            NavigationService.Navigate(typeof(Views.HomePage));
+            NavigationService.Navigate(typeof(Views.BookmarksPage));
         }
         private void SetupDefaultViewModel() => DataContext = new WebXamlViewViewModel();
 

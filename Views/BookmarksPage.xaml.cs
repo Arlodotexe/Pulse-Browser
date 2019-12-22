@@ -17,14 +17,16 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Pulse_Browser.Views
 {
+
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class HomePage : Page
+    public sealed partial class BookmarksPage : Page
     {
-        public HomePage()
+        public BookmarksPage()
         {
             this.InitializeComponent();
+
         }
     }
 }

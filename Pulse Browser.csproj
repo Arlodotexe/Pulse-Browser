@@ -138,8 +138,8 @@
     <Compile Include="UserControls\WebXamlView.xaml.cs">
       <DependentUpon>WebXamlView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\HomePage.xaml.cs">
-      <DependentUpon>HomePage.xaml</DependentUpon>
+    <Compile Include="Views\BookmarksPage.xaml.cs">
+      <DependentUpon>BookmarksPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -182,7 +182,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\HomePage.xaml">
+    <Page Include="Views\BookmarksPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
