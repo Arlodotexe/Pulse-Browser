@@ -2,13 +2,19 @@
     x:Class="Pulse_Browser.Views.BookmarksPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Pulse_Browser.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:services="using:Pulse_Browser.Services"
     mc:Ignorable="d"
     Background="{ThemeResource SystemControlChromeMediumAcrylicWindowMediumBrush}">
 
     <Grid>
-
+        <ListView ItemsSource="{x:Bind ViewModel.Bookmarks, Mode=OneWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="services:Bookmark">
+                    <Grid></Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>
