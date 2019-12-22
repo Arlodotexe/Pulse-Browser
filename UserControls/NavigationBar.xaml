@@ -297,7 +297,7 @@
         <AutoSuggestBox QuerySubmitted="AutoSuggestBox_QuerySubmitted" Style="{StaticResource NavigationBox}" Grid.Column="4" PlaceholderText="Search or enter a web address" VerticalAlignment="Center" Margin="5,0,5,0" />
 
 
-        <Button Width="40" Height="40" Grid.Column="5" Style="{StaticResource TransparentSquareButton}">
+        <Button Width="40" Height="40" Grid.Column="5" Style="{StaticResource TransparentSquareButton}" Click="FavoritesButton_Click">
             <FontIcon FontSize="16" FontFamily="Segoe MDL2 Assets" Glyph="&#xE728;" />
         </Button>
 
