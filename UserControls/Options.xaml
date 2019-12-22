@@ -13,7 +13,7 @@
         <Pivot Title="Options">
             <Pivot.TitleTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding}" FontSize="28" FontWeight="SemiLight" />
+                    <TextBlock Text="{Binding}" FontSize="28" Margin="0,0,0,-15" FontWeight="SemiLight" />
                 </DataTemplate>
             </Pivot.TitleTemplate>
             <Pivot.HeaderTemplate>
