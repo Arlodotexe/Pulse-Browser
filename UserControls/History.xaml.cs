@@ -22,6 +22,7 @@ namespace Pulse_Browser.UserControls
 {
     public class WebHistoryEntry : NavigationEntry
     {
+        public WebHistoryEntry() { }
         public WebHistoryEntry(NavigationEntry navigationEntry)
         {
             Current = navigationEntry.Current;
@@ -52,8 +53,23 @@ namespace Pulse_Browser.UserControls
 
         private void PopulateHistoryView()
         {
+            if (ViewModel.IsInDesignMode)
+            {
+                ViewModel.History = new ObservableCollection<WebHistoryEntry>(new List<WebHistoryEntry>() {
+                    new WebHistoryEntry()
+                    {
+                        WebUri = new Uri("https://google.com/"),
+                        VisitedAt = DateTime.Now,
+                        Current = true
+                    }
+                });
+                return;
+            }
+
             // TODO: Instead of showing history from the current session and the current view, get saved entries from persistent storage
             var History = MainShell.CurrentInstance.CurrentNavigationService.HistoryStack;
+
+            if (History is null) return;
 
             // Convert full History class to WebHistory
             // Filters out native navigation pages and add favicon
