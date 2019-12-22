@@ -6,28 +6,28 @@ using System.Threading.Tasks;
 
 namespace Pulse_Browser.Services
 {
+    public class NavigationEntry
+    {
+        public DateTime VisitedAt { get; set; }
+        public NavigationPageType Kind { get; set; }
+
+        public Uri WebUri { get; set; }
+
+        public Type NativePageType { get; set; }
+        public object NativePageParam { get; set; }
+
+        /// <summary>
+        /// Marker indicating that this is the current active page
+        /// </summary>
+        public bool Current
+        { get; set; } = false;
+    }
+    public enum NavigationPageType
+    {
+        Web, Native
+    }
     public class NavigationService
     {
-        public class NavigationEntry
-        {
-            public DateTime VisitedAt { get; set; }
-            public NavigationPageType Kind { get; set; }
-
-            public Uri WebUri { get; set; }
-
-            public Type NativePageType { get; set; }
-            public object NativePageParam { get; set; }
-
-            /// <summary>
-            /// Marker indicating that this is the current active page
-            /// </summary>
-            public bool Current
-            { get; set; } = false;
-        }
-        public enum NavigationPageType
-        {
-            Web, Native
-        }
 
         public Stack<NavigationEntry> HistoryStack { get; set; } = new Stack<NavigationEntry>();
 

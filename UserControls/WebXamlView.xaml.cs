@@ -69,14 +69,14 @@ namespace Pulse_Browser.UserControls
             NavigationService.CanGoBackChanged += NavigationService_CanGoBackChanged;
         }
 
-        private void Navigate(NavigationService.NavigationEntry navigationEntry)
+        private void Navigate(NavigationEntry navigationEntry)
         {
-            if (navigationEntry.Kind == NavigationService.NavigationPageType.Web)
+            if (navigationEntry.Kind == NavigationPageType.Web)
             {
                 ViewModel.CurrentWebAddress = navigationEntry.WebUri;
                 ViewModel.WebViewShown = true;
             }
-            else if (navigationEntry.Kind == NavigationService.NavigationPageType.Native)
+            else if (navigationEntry.Kind == NavigationPageType.Native)
             {
                 ViewModel.WebViewShown = false;
                 AppFrame.Navigate(navigationEntry.NativePageType, navigationEntry.NativePageParam);
@@ -85,11 +85,11 @@ namespace Pulse_Browser.UserControls
 
         private void NavigationService_CanGoBackChanged(bool canGoBack) => _canGoBack = canGoBack;
         private void NavigationService_CanGoForwardChanged(bool canGoForward) => _canGoForward = canGoForward;
-        private void NavigationService_NavigationRequested(NavigationService.NavigationEntry navigationEntry) => Navigate(navigationEntry);
+        private void NavigationService_NavigationRequested(NavigationEntry navigationEntry) => Navigate(navigationEntry);
 
-        private void NavigationService_ForwardRequested(NavigationService.NavigationEntry navigationEntry) => Navigate(navigationEntry);
+        private void NavigationService_ForwardRequested(NavigationEntry navigationEntry) => Navigate(navigationEntry);
 
-        private void NavigationService_BackRequested(NavigationService.NavigationEntry navigationEntry) => Navigate(navigationEntry);
+        private void NavigationService_BackRequested(NavigationEntry navigationEntry) => Navigate(navigationEntry);
 
         private void NavigationService_RefreshRequested() => AppWebView.Refresh();
 
