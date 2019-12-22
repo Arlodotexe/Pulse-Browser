@@ -24,10 +24,10 @@ namespace Pulse_Browser.UserControls
         private Uri currentAddress = new Uri("about:home");
         private bool webViewShown = false;
 
-        public Uri CurrentAddress
+        public Uri CurrentWebAddress
         {
             get => currentAddress;
-            set => Set(() => this.CurrentAddress, ref currentAddress, value);
+            set => Set(() => this.CurrentWebAddress, ref currentAddress, value);
         }
 
         public bool WebViewShown
@@ -55,68 +55,44 @@ namespace Pulse_Browser.UserControls
             DataContextChanged += (s, e) => this.Bindings.Update();
 
             // Navigate to the default address so it's in the navigation stack
-            NavigationService.Navigate(ViewModel.CurrentAddress);
-
-            AppWebView.NavigationStarting += AppWebView_NavigationStarting;
-            AppWebView.NavigationFailed += AppWebView_NavigationFailed;
+            NavigationService.Navigate(typeof(Views.HomePage));
         }
         private void SetupDefaultViewModel() => DataContext = new WebXamlViewViewModel();
 
         private void SetupNavigationService()
         {
             NavigationService.NavigationRequested += NavigationService_NavigationRequested;
-            NavigationService.RefreshRequested += WebNavigationService_RefreshRequested;
-            NavigationService.BackRequested += WebNavigationService_BackRequested;
-            NavigationService.ForwardRequested += WebNavigationService_ForwardRequested;
-            NavigationService.CanGoForwardChanged += WebNavigationService_CanGoForwardChanged;
-            NavigationService.CanGoBackChanged += WebNavigationService_CanGoBackChanged;
+            NavigationService.RefreshRequested += NavigationService_RefreshRequested;
+            NavigationService.BackRequested += NavigationService_BackRequested;
+            NavigationService.ForwardRequested += NavigationService_ForwardRequested;
+            NavigationService.CanGoForwardChanged += NavigationService_CanGoForwardChanged;
+            NavigationService.CanGoBackChanged += NavigationService_CanGoBackChanged;
         }
 
-        private void AppWebView_NavigationFailed(object sender, WebViewNavigationFailedEventArgs e) => InterceptHomePage(e.Uri);
-
-        private void AppWebView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args) => InterceptHomePage(args.Uri);
-
-        /// <summary>
-        /// Checks Uri for home page and sets up the ViewModel appropriately
-        /// </summary>
-        /// <param name="uri">Uri to check</param>
-        /// <returns>True if found, otherwise false</returns>
-        private bool InterceptHomePage(Uri uri)
+        private void Navigate(NavigationService.NavigationEntry navigationEntry)
         {
-            switch (uri?.ToString())
+            if (navigationEntry.Kind == NavigationService.NavigationPageType.Web)
             {
-                case "about:home":
-                    ViewModel.WebViewShown = false;
-                    AppFrame.Navigate(typeof(Views.HomePage));
-                    return true;
-                default:
-                    ViewModel.WebViewShown = true;
-                    return false;
+                ViewModel.CurrentWebAddress = navigationEntry.WebUri;
+                ViewModel.WebViewShown = true;
+            }
+            else if (navigationEntry.Kind == NavigationService.NavigationPageType.Native)
+            {
+                ViewModel.WebViewShown = false;
+                AppFrame.Navigate(navigationEntry.NativePageType, navigationEntry.NativePageParam);
             }
         }
 
-        private void WebNavigationService_CanGoBackChanged(bool canGoBack) => _canGoBack = canGoBack;
-        private void WebNavigationService_CanGoForwardChanged(bool canGoForward) => _canGoForward = canGoForward;
+        private void NavigationService_CanGoBackChanged(bool canGoBack) => _canGoBack = canGoBack;
+        private void NavigationService_CanGoForwardChanged(bool canGoForward) => _canGoForward = canGoForward;
+        private void NavigationService_NavigationRequested(NavigationService.NavigationEntry navigationEntry) => Navigate(navigationEntry);
 
-        private void WebNavigationService_ForwardRequested(Uri address)
-        {
-            if (InterceptHomePage(address)) return;
-            ViewModel.CurrentAddress = address;
-        }
+        private void NavigationService_ForwardRequested(NavigationService.NavigationEntry navigationEntry) => Navigate(navigationEntry);
 
-        private void WebNavigationService_BackRequested(Uri address)
-        {
-            if (InterceptHomePage(address)) return;
-            ViewModel.CurrentAddress = address;
-        }
+        private void NavigationService_BackRequested(NavigationService.NavigationEntry navigationEntry) => Navigate(navigationEntry);
 
-        private void WebNavigationService_RefreshRequested()
-        {
-            if (ViewModel.WebViewShown) AppWebView.Refresh();
-        }
-        private void NavigationService_NavigationRequested(Uri address)
-        {
-            ViewModel.CurrentAddress = address;
-        }
+        private void NavigationService_RefreshRequested() => AppWebView.Refresh();
+
+        private void NavigationService_NavigationRequested(Uri address) => ViewModel.CurrentWebAddress = address;
     }
 }

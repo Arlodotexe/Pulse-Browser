@@ -8,28 +8,39 @@ namespace Pulse_Browser.Services
 {
     public class NavigationService
     {
-        public class HistoryEntry
+        public class NavigationEntry
         {
             public DateTime VisitedAt { get; set; }
-            public Uri Uri { get; set; }
+            public NavigationPageType Kind { get; set; }
+
+            public Uri WebUri { get; set; }
+
+            public Type NativePageType { get; set; }
+            public object NativePageParam { get; set; }
+
             /// <summary>
             /// Marker indicating that this is the current active page
             /// </summary>
-            public bool Current { get; set; } = false;
+            public bool Current
+            { get; set; } = false;
+        }
+        public enum NavigationPageType
+        {
+            Web, Native
         }
 
-        public Stack<HistoryEntry> HistoryStack { get; set; } = new Stack<HistoryEntry>();
+        public Stack<NavigationEntry> HistoryStack { get; set; } = new Stack<NavigationEntry>();
 
-        public delegate void OnNavigatedEvent(Uri address);
+        public delegate void OnNavigatedEvent(NavigationEntry navigationEntry);
         public event OnNavigatedEvent NavigationRequested;
 
         public delegate void RefreshRequestedEvent();
         public event RefreshRequestedEvent RefreshRequested;
 
-        public delegate void BackRequestedEvent(Uri address);
+        public delegate void BackRequestedEvent(NavigationEntry navigationEntry);
         public event BackRequestedEvent BackRequested;
 
-        public delegate void ForwardRequestedEvent(Uri address);
+        public delegate void ForwardRequestedEvent(NavigationEntry navigationEntry);
         public event ForwardRequestedEvent ForwardRequested;
 
         public delegate void CanGoForwardChangedEvent(bool canGoForward);
@@ -43,17 +54,42 @@ namespace Pulse_Browser.Services
             // Reset all entries to not current
             foreach (var h in HistoryStack) h.Current = false;
 
-            HistoryStack.Push(new HistoryEntry()
+            var newNavigationEntry = new NavigationEntry()
             {
-                Uri = address,
+                Kind = NavigationPageType.Web,
+                WebUri = address,
                 VisitedAt = DateTime.Now,
                 Current = true
-            });
+            };
+
+            HistoryStack.Push(newNavigationEntry);
 
             CanGoBackChanged?.Invoke(true);
             CanGoForwardChanged?.Invoke(false);
 
-            NavigationRequested?.Invoke(address);
+            NavigationRequested?.Invoke(newNavigationEntry);
+        }
+        public void Navigate(Type pageType) => Navigate(pageType, null);
+        public void Navigate(Type pageType, object param)
+        {
+            // Reset all entries to not current
+            foreach (var h in HistoryStack) h.Current = false;
+
+            var newNavigationEntry = new NavigationEntry()
+            {
+                Kind = NavigationPageType.Native,
+                NativePageType = pageType,
+                NativePageParam = param,
+                VisitedAt = DateTime.Now,
+                Current = true
+            };
+
+            HistoryStack.Push(newNavigationEntry);
+
+            CanGoBackChanged?.Invoke(true);
+            CanGoForwardChanged?.Invoke(false);
+
+            NavigationRequested?.Invoke(newNavigationEntry);
         }
 
         public void Refresh()
@@ -93,7 +129,7 @@ namespace Pulse_Browser.Services
                 CanGoBackChanged?.Invoke(newHistoryItemIndexOnStack + 1 < HistoryStack.Count());
                 CanGoForwardChanged?.Invoke(true);
 
-                BackRequested?.Invoke(newEntry.Uri);
+                BackRequested?.Invoke(newEntry);
             }
         }
 
@@ -130,7 +166,7 @@ namespace Pulse_Browser.Services
                 // If there is something else at the front of the stack, we can navigate forward to it
                 CanGoForwardChanged?.Invoke(currentIndex_validStack - 1 > 0);
 
-                ForwardRequested?.Invoke(newEntry.Uri);
+                ForwardRequested?.Invoke(newEntry);
             }
         }
     }
