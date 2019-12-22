@@ -1,5 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
+using Pulse_Browser.Services;
 using System;
+using System.Web;
 using Windows.UI.Xaml.Controls;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -33,26 +35,69 @@ namespace Pulse_Browser
     public sealed partial class MainShell : Page
     {
         public MainShellViewModel ViewModel => DataContext as MainShellViewModel;
+        public NavigationService CurrentNavigationService;
 
         public MainShell()
         {
             InitializeComponent();
             SetupDefaultViewModel();
             DataContextChanged += (s, e) => this.Bindings.Update();
-
-            SetupWebNavigationEvents();
         }
-
-        public void SetupWebNavigationEvents()
-        {
-            Services.NavigationService.CanGoForwardChanged += WebNavigationService_CanGoForwardChanged;
-            Services.NavigationService.CanGoBackChanged += WebNavigationService_CanGoBackChanged;
-        }
-
-        private void WebNavigationService_CanGoBackChanged(bool canGoBack) => ViewModel.BackButtonEnabled = canGoBack;
-        private void WebNavigationService_CanGoForwardChanged(bool canGoForward) => ViewModel.ForwardButtonEnabled = canGoForward;
 
         private void SetupDefaultViewModel() => DataContext = new MainShellViewModel();
 
+        private void NavigationBar_NavigationQuerySubmitted(string query)
+        {
+            if (!string.IsNullOrEmpty(query))
+            {
+                bool isUri = Uri.TryCreate(query, UriKind.Absolute, out Uri destination)
+                    && (destination.Scheme == Uri.UriSchemeHttp || destination.Scheme == Uri.UriSchemeHttps);
+
+                if (isUri)
+                {
+                    CurrentNavigationService?.Navigate(destination);
+                }
+                else
+                {
+                    Uri searchAddress = new Uri($"https://www.google.com/search?q={HttpUtility.UrlEncode(query)}");
+                    CurrentNavigationService?.Navigate(searchAddress);
+                }
+            }
+        }
+
+        private void NavigationBar_BackButtonClicked()
+        {
+            CurrentNavigationService?.Back();
+        }
+
+        private void NavigationBar_ForwardButtonClicked()
+        {
+            CurrentNavigationService?.Forward();
+        }
+
+        private void NavigationBar_RefreshButtonClicked()
+        {
+            CurrentNavigationService?.Refresh();
+        }
+
+        private void WebXamlView_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            var XamlWebViewer = sender as UserControls.WebXamlView;
+
+            CurrentNavigationService = XamlWebViewer.NavigationService;
+            CurrentNavigationService.CanGoBackChanged += CurrentNavigationService_CanGoBackChanged;
+            CurrentNavigationService.CanGoForwardChanged += CurrentNavigationService_CanGoForwardChanged;
+        }
+
+        private void CurrentNavigationService_CanGoForwardChanged(bool canGoForward) => ViewModel.ForwardButtonEnabled = canGoForward;
+
+        private void CurrentNavigationService_CanGoBackChanged(bool canGoBack) => ViewModel.BackButtonEnabled = canGoBack;
+
+        private void WebXamlView_Unloaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            CurrentNavigationService.CanGoBackChanged -= CurrentNavigationService_CanGoBackChanged;
+            CurrentNavigationService.CanGoForwardChanged -= CurrentNavigationService_CanGoForwardChanged;
+            CurrentNavigationService = null;
+        }
     }
 }

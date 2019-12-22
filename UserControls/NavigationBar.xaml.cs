@@ -52,28 +52,29 @@ namespace Pulse_Browser.UserControls
           new PropertyMetadata(null)
         );
 
+        public event NavigationQuerySubmittedHandler NavigationQuerySubmitted;
+        public delegate void NavigationQuerySubmittedHandler(string query);
+
+        public event HomeButtonClickedHandler HomeButtonClicked;
+        public delegate void HomeButtonClickedHandler();
+
+        public event RefreshButtonClickedHandler RefreshButtonClicked;
+        public delegate void RefreshButtonClickedHandler();
+
+        public event BackButtonClickedHandler BackButtonClicked;
+        public delegate void BackButtonClickedHandler();
+
+        public event ForwardButtonClickedHandler ForwardButtonClicked;
+        public delegate void ForwardButtonClickedHandler();
+
         private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
-            if (!string.IsNullOrEmpty(args.QueryText))
-            {
-                bool isUri = Uri.TryCreate(args.QueryText, UriKind.Absolute, out Uri destination)
-                    && (destination.Scheme == Uri.UriSchemeHttp || destination.Scheme == Uri.UriSchemeHttps);
-
-                if (isUri)
-                {
-                    Services.NavigationService.Navigate(destination);
-                }
-                else
-                {
-                    Uri searchAddress = new Uri($"https://www.google.com/search?q={HttpUtility.UrlEncode(args.QueryText)}");
-                    Services.NavigationService.Navigate(searchAddress);
-                }
-            }
+            NavigationQuerySubmitted?.Invoke(args.QueryText);
         }
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
-            Services.NavigationService.Navigate(new Uri("about:home"));
+            HomeButtonClicked?.Invoke();
         }
 
         private void SettingsMenuFlyoutItem_Click(object sender, RoutedEventArgs e)
@@ -88,17 +89,17 @@ namespace Pulse_Browser.UserControls
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-            Services.NavigationService.Refresh();
+            RefreshButtonClicked?.Invoke();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Services.NavigationService.Back();
+            BackButtonClicked?.Invoke();
         }
 
         private void ForwardButton_Click(object sender, RoutedEventArgs e)
         {
-            Services.NavigationService.Forward();
+            ForwardButtonClicked?.Invoke();
         }
     }
 }

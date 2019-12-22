@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pulse_Browser.Services
 {
-    public static class NavigationService
+    public class NavigationService
     {
         public class HistoryEntry
         {
@@ -18,27 +18,27 @@ namespace Pulse_Browser.Services
             public bool Current { get; set; } = false;
         }
 
-        public static Stack<HistoryEntry> HistoryStack { get; set; } = new Stack<HistoryEntry>();
+        public Stack<HistoryEntry> HistoryStack { get; set; } = new Stack<HistoryEntry>();
 
         public delegate void OnNavigatedEvent(Uri address);
-        public static event OnNavigatedEvent NavigationRequested;
+        public event OnNavigatedEvent NavigationRequested;
 
         public delegate void RefreshRequestedEvent();
-        public static event RefreshRequestedEvent RefreshRequested;
+        public event RefreshRequestedEvent RefreshRequested;
 
         public delegate void BackRequestedEvent(Uri address);
-        public static event BackRequestedEvent BackRequested;
+        public event BackRequestedEvent BackRequested;
 
         public delegate void ForwardRequestedEvent(Uri address);
-        public static event ForwardRequestedEvent ForwardRequested;
+        public event ForwardRequestedEvent ForwardRequested;
 
         public delegate void CanGoForwardChangedEvent(bool canGoForward);
-        public static event CanGoForwardChangedEvent CanGoForwardChanged;
+        public event CanGoForwardChangedEvent CanGoForwardChanged;
 
         public delegate void CanGoBackChangedEvent(bool canGoBack);
-        public static event CanGoBackChangedEvent CanGoBackChanged;
+        public event CanGoBackChangedEvent CanGoBackChanged;
 
-        public static void Navigate(Uri address)
+        public void Navigate(Uri address)
         {
             // Reset all entries to not current
             foreach (var h in HistoryStack) h.Current = false;
@@ -56,12 +56,12 @@ namespace Pulse_Browser.Services
             NavigationRequested?.Invoke(address);
         }
 
-        public static void Refresh()
+        public void Refresh()
         {
             RefreshRequested?.Invoke();
         }
 
-        public static void Back()
+        public void Back()
         {
             var currentEntry = HistoryStack.FirstOrDefault(h => h.Current);
             int currentIndex = HistoryStack.ToList().IndexOf(currentEntry);
@@ -97,7 +97,7 @@ namespace Pulse_Browser.Services
             }
         }
 
-        public static void Forward()
+        public void Forward()
         {
             var currentEntry = HistoryStack.FirstOrDefault(h => h.Current);
 

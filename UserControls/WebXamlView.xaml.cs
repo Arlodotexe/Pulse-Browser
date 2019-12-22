@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using Pulse_Browser.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -37,7 +38,13 @@ namespace Pulse_Browser.UserControls
     }
     public sealed partial class WebXamlView : UserControl
     {
-        public WebXamlViewViewModel ViewModel => DataContext as WebXamlViewViewModel;
+        private WebXamlViewViewModel ViewModel => DataContext as WebXamlViewViewModel;
+        public NavigationService NavigationService = new NavigationService();
+
+        private bool _canGoBack = false;
+        private bool _canGoForward = false;
+        public bool CanGoBack { get => _canGoBack; }
+        public bool CanGoForward { get => _canGoForward; }
 
         public WebXamlView()
         {
@@ -48,19 +55,21 @@ namespace Pulse_Browser.UserControls
             DataContextChanged += (s, e) => this.Bindings.Update();
 
             // Navigate to the default address so it's in the navigation stack
-            Services.NavigationService.Navigate(ViewModel.CurrentAddress);
+            NavigationService.Navigate(ViewModel.CurrentAddress);
 
             AppWebView.NavigationStarting += AppWebView_NavigationStarting;
             AppWebView.NavigationFailed += AppWebView_NavigationFailed;
         }
         private void SetupDefaultViewModel() => DataContext = new WebXamlViewViewModel();
 
-        public void SetupNavigationService()
+        private void SetupNavigationService()
         {
-            Services.NavigationService.NavigationRequested += NavigationService_NavigationRequested;
-            Services.NavigationService.RefreshRequested += WebNavigationService_RefreshRequested;
-            Services.NavigationService.BackRequested += WebNavigationService_BackRequested;
-            Services.NavigationService.ForwardRequested += WebNavigationService_ForwardRequested;
+            NavigationService.NavigationRequested += NavigationService_NavigationRequested;
+            NavigationService.RefreshRequested += WebNavigationService_RefreshRequested;
+            NavigationService.BackRequested += WebNavigationService_BackRequested;
+            NavigationService.ForwardRequested += WebNavigationService_ForwardRequested;
+            NavigationService.CanGoForwardChanged += WebNavigationService_CanGoForwardChanged;
+            NavigationService.CanGoBackChanged += WebNavigationService_CanGoBackChanged;
         }
 
         private void AppWebView_NavigationFailed(object sender, WebViewNavigationFailedEventArgs e) => InterceptHomePage(e.Uri);
@@ -86,6 +95,8 @@ namespace Pulse_Browser.UserControls
             }
         }
 
+        private void WebNavigationService_CanGoBackChanged(bool canGoBack) => _canGoBack = canGoBack;
+        private void WebNavigationService_CanGoForwardChanged(bool canGoForward) => _canGoForward = canGoForward;
 
         private void WebNavigationService_ForwardRequested(Uri address)
         {
