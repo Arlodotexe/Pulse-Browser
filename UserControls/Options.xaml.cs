@@ -23,5 +23,26 @@ namespace Pulse_Browser.UserControls
         {
             this.InitializeComponent();
         }
+
+        public enum LandingTab
+        {
+            History, Settings
+        }
+        public Options(LandingTab landingTab)
+        {
+            this.InitializeComponent();
+
+            switch (landingTab)
+            {
+                case LandingTab.History:
+                    OptionsPivot.SelectedIndex = 0;
+                    break;
+                case LandingTab.Settings:
+                    OptionsPivot.SelectedIndex = 1;
+                    break;
+                default:
+                    throw new NotImplementedException($"Landing tab not recognized: {landingTab}");
+            }
+        }
     }
 }

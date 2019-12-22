@@ -406,7 +406,7 @@
     </UserControl.Resources>
 
     <StackPanel>
-        <Pivot Style="{StaticResource PivotStyle}" Title="Options">
+        <Pivot Style="{StaticResource PivotStyle}" Title="Options" x:Name="OptionsPivot">
             <Pivot.Resources>
                 <Style TargetType="PivotHeaderItem" BasedOn="{StaticResource headerItemStyle}"/>
             </Pivot.Resources>
