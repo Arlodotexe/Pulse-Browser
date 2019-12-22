@@ -34,11 +34,14 @@ namespace Pulse_Browser
     /// </summary>
     public sealed partial class MainShell : Page
     {
+        public static MainShell CurrentInstance;
         public MainShellViewModel ViewModel => DataContext as MainShellViewModel;
         public NavigationService CurrentNavigationService;
 
         public MainShell()
         {
+            CurrentInstance = this;
+
             InitializeComponent();
             SetupDefaultViewModel();
             DataContextChanged += (s, e) => this.Bindings.Update();

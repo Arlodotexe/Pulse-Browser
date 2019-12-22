@@ -31,6 +31,13 @@ namespace Pulse_Browser.UserControls
         {
             this.InitializeComponent();
             DataContextChanged += (s, e) => this.Bindings.Update();
+            PopulateHistoryView();
+        }
+
+        private void PopulateHistoryView()
+        {
+            // TODO: Instead of showing history from the current session and the current view, get saved entries from persistent storage
+            ViewModel.History = new ObservableCollection<NavigationEntry>(MainShell.CurrentInstance.CurrentNavigationService.HistoryStack.Where(h => h.Kind == NavigationPageType.Web));
         }
 
         public HistoryViewerViewModel ViewModel => DataContext as HistoryViewerViewModel;
