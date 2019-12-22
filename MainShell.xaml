@@ -14,7 +14,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <usercontrols:NavigationBar BackButtonClicked="NavigationBar_BackButtonClicked" ForwardButtonClicked="NavigationBar_ForwardButtonClicked" RefreshButtonClicked="NavigationBar_RefreshButtonClicked" NavigationQuerySubmitted="NavigationBar_NavigationQuerySubmitted" BackButtonEnabled="{x:Bind ViewModel.BackButtonEnabled, Mode=OneWay}" ForwardButtonEnabled="{x:Bind ViewModel.ForwardButtonEnabled, Mode=OneWay}" />
+        <usercontrols:NavigationBar BackButtonClicked="NavigationBar_BackButtonClicked" ForwardButtonClicked="NavigationBar_ForwardButtonClicked" RefreshButtonClicked="NavigationBar_RefreshButtonClicked" NavigationQuerySubmitted="NavigationBar_NavigationQuerySubmitted" BackButtonEnabled="{x:Bind ViewModel.BackButtonEnabled, Mode=OneWay}" ForwardButtonEnabled="{x:Bind ViewModel.ForwardButtonEnabled, Mode=OneWay}" HistoryMenuFlyoutItemButtonClicked="NavigationBar_HistoryMenuFlyoutItemButtonClicked" />
 
         <usercontrols:WebXamlView Unloaded="WebXamlView_Unloaded" Loaded="WebXamlView_Loaded" x:Name="WebXamlView" Grid.Row="1"/>
     </Grid>

@@ -102,5 +102,10 @@ namespace Pulse_Browser
             CurrentNavigationService.CanGoForwardChanged -= CurrentNavigationService_CanGoForwardChanged;
             CurrentNavigationService = null;
         }
+
+        private void NavigationBar_HistoryMenuFlyoutItemButtonClicked()
+        {
+            Helpers.AppContentDialog.OpenDialog(new UserControls.History());
+        }
     }
 }
