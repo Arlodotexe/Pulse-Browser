@@ -5,11 +5,32 @@
     xmlns:local="using:Pulse_Browser.UserControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Services="using:Pulse_Browser.Services"
     mc:Ignorable="d"
     d:DesignHeight="600"
     d:DesignWidth="400">
 
     <Grid>
-        
+        <ListView ItemsSource="{x:Bind ViewModel.History}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="Services:NavigationEntry">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.RowSpan="2" />
+
+                        <TextBlock Text="{Binding WebUri}" />
+                        <TextBlock Text="{Binding VisitedAt}" />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </UserControl>

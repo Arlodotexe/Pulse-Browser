@@ -1,5 +1,8 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight;
+using Pulse_Browser.Services;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -17,11 +20,19 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Pulse_Browser.UserControls
 {
+    public class HistoryViewerViewModel : ViewModelBase
+    {
+        public ObservableCollection<NavigationEntry> History = new ObservableCollection<NavigationEntry>();
+    }
+
     public sealed partial class History : UserControl
     {
         public History()
         {
             this.InitializeComponent();
+            DataContextChanged += (s, e) => this.Bindings.Update();
         }
+
+        public HistoryViewerViewModel ViewModel => DataContext as HistoryViewerViewModel;
     }
 }
