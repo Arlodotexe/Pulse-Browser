@@ -278,15 +278,15 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <Button Width="40" Height="40" Style="{StaticResource TransparentSquareButton}">
+        <Button Width="40" Height="40" Style="{StaticResource TransparentSquareButton}" Click="BackButton_Click" IsEnabled="{Binding BackButtonEnabled}">
             <FontIcon FontSize="16" FontFamily="Segoe MDL2 Assets" Glyph="&#xE0C4;" />
         </Button>
 
-        <Button Width="40" Height="40" Grid.Column="1" Style="{StaticResource TransparentSquareButton}">
+        <Button Width="40" Height="40" Grid.Column="1" Style="{StaticResource TransparentSquareButton}" Click="ForwardButton_Click" IsEnabled="{Binding ForwardButtonEnabled}">
             <FontIcon FontSize="16" FontFamily="Segoe MDL2 Assets" Glyph="&#xE0AB;" />
         </Button>
 
-        <Button Width="40" Height="40" Grid.Column="2" Style="{StaticResource TransparentSquareButton}">
+        <Button Width="40" Height="40" Grid.Column="2" Style="{StaticResource TransparentSquareButton}" Click="RefreshButton_Click">
             <FontIcon FontSize="16" FontFamily="Segoe MDL2 Assets" Glyph="&#xE72C;" />
         </Button>
 
@@ -297,16 +297,16 @@
         <AutoSuggestBox QuerySubmitted="AutoSuggestBox_QuerySubmitted" Style="{StaticResource NavigationBox}" Grid.Column="4" PlaceholderText="Search or enter a web address" VerticalAlignment="Center" Margin="5,0,5,0" />
 
 
-        <Button Width="40" Height="40" Grid.Column="5" Style="{StaticResource TransparentSquareButton}">
+        <Button Width="40" Height="40" Grid.Column="5" Style="{StaticResource TransparentSquareButton}" Click="FavoritesButton_Click">
             <FontIcon FontSize="16" FontFamily="Segoe MDL2 Assets" Glyph="&#xE728;" />
         </Button>
 
-        <Button Width="40" Height="40" Grid.Column="6" Style="{StaticResource TransparentSquareButton}">
+        <Button Width="40" Height="40" Grid.Column="6" Style="{StaticResource TransparentSquareButton}" Click="MoreMenuButton_Click">
             <FontIcon FontSize="16" FontFamily="Segoe MDL2 Assets" Glyph="&#xE10C;" />
-            <Button.Flyout>
-                <MenuFlyout>
 
-                    <MenuFlyoutItem Click="HistoryMenuFlyoutItem_Click" Text="History">
+            <FlyoutBase.AttachedFlyout>
+                <MenuFlyout x:Name="MoreMenuFlyout">
+                    <MenuFlyoutItem Width="250" Click="HistoryMenuFlyoutItem_Click" Text="History">
                         <MenuFlyoutItem.Icon>
                             <FontIcon Glyph="&#xE81C;" FontFamily="Segoe MDL2 Assets" />
                         </MenuFlyoutItem.Icon>
@@ -315,14 +315,14 @@
                         </MenuFlyoutItem.KeyboardAccelerators>
                     </MenuFlyoutItem>
 
-                    <MenuFlyoutItem Click="SettingsMenuFlyoutItem_Click" Text="Settings">
+                    <MenuFlyoutItem Width="250" Click="SettingsMenuFlyoutItem_Click" Text="Settings">
                         <MenuFlyoutItem.Icon>
                             <FontIcon Glyph="&#xE713;" FontFamily="Segoe MDL2 Assets" />
                         </MenuFlyoutItem.Icon>
                     </MenuFlyoutItem>
                 </MenuFlyout>
-                
-            </Button.Flyout>
+            </FlyoutBase.AttachedFlyout>
+
         </Button>
 
     </Grid>

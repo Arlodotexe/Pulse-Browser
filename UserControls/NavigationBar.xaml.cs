@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,38 +26,74 @@ namespace Pulse_Browser.UserControls
             this.InitializeComponent();
         }
 
-        private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        public bool BackButtonEnabled
         {
-            if (!string.IsNullOrEmpty(args.QueryText))
-            {
-                bool isUri = Uri.TryCreate(args.QueryText, UriKind.Absolute, out Uri destination)
-                    && (destination.Scheme == Uri.UriSchemeHttp || destination.Scheme == Uri.UriSchemeHttps);
-
-                if (isUri)
-                {
-                    Services.WebNavigationService.Navigate(destination);
-                }
-                else
-                {
-                    Uri searchAddress = new Uri($"https://www.google.com/search?q={HttpUtility.UrlEncode(args.QueryText)}");
-                    Services.WebNavigationService.Navigate(searchAddress);
-                }
-            }
+            get { return (bool)GetValue(BackButtonEnabledProperty); }
+            set { SetValue(BackButtonEnabledProperty, value); }
         }
 
-        private void HomeButton_Click(object sender, RoutedEventArgs e)
+        private DependencyProperty BackButtonEnabledProperty = DependencyProperty.Register(
+          "BackButtonEnabled",
+          typeof(bool),
+          typeof(bool),
+          new PropertyMetadata(null)
+        );
+
+        public bool ForwardButtonEnabled
         {
-            Services.WebNavigationService.Navigate(new Uri("about:home"));
+            get { return (bool)GetValue(ForwardButtonEnabledProperty); }
+            set { SetValue(ForwardButtonEnabledProperty, value); }
         }
 
-        private void SettingsMenuFlyoutItem_Click(object sender, RoutedEventArgs e)
+        private DependencyProperty ForwardButtonEnabledProperty = DependencyProperty.Register(
+          "ForwardButtonEnabled",
+          typeof(bool),
+          typeof(bool),
+          new PropertyMetadata(null)
+        );
+
+        public event NavigationQuerySubmittedHandler NavigationQuerySubmitted;
+        public delegate void NavigationQuerySubmittedHandler(string query);
+
+        public event HomeButtonClickedHandler HomeButtonClicked;
+        public delegate void HomeButtonClickedHandler();
+
+        public event RefreshButtonClickedHandler RefreshButtonClicked;
+        public delegate void RefreshButtonClickedHandler();
+
+        public event BackButtonClickedHandler BackButtonClicked;
+        public delegate void BackButtonClickedHandler();
+
+        public event ForwardButtonClickedHandler ForwardButtonClicked;
+        public delegate void ForwardButtonClickedHandler();
+
+        public event SettingsMenuFlyoutItemClickedHandler SettingsMenuFlyoutItemButtonClicked;
+        public delegate void SettingsMenuFlyoutItemClickedHandler();
+
+        public event HistoryMenuFlyoutItemClickedHandler HistoryMenuFlyoutItemButtonClicked;
+        public delegate void HistoryMenuFlyoutItemClickedHandler();
+
+        public event FavoritesMenuFlyoutItemClickedHandler FavoritesMenuItemButtonClicked;
+        public delegate void FavoritesMenuFlyoutItemClickedHandler();
+
+        private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) => NavigationQuerySubmitted?.Invoke(args.QueryText);
+
+        private void HomeButton_Click(object sender, RoutedEventArgs e) => HomeButtonClicked?.Invoke();
+
+        private void SettingsMenuFlyoutItem_Click(object sender, RoutedEventArgs e) => SettingsMenuFlyoutItemButtonClicked?.Invoke();
+        private void HistoryMenuFlyoutItem_Click(object sender, RoutedEventArgs e) => HistoryMenuFlyoutItemButtonClicked?.Invoke();
+
+        private void RefreshButton_Click(object sender, RoutedEventArgs e) => RefreshButtonClicked?.Invoke();
+
+        private void BackButton_Click(object sender, RoutedEventArgs e) => BackButtonClicked?.Invoke();
+
+        private void ForwardButton_Click(object sender, RoutedEventArgs e) => ForwardButtonClicked?.Invoke();
+
+        private void FavoritesButton_Click(object sender, RoutedEventArgs e) => FavoritesMenuItemButtonClicked?.Invoke();
+
+        private void MoreMenuButton_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void HistoryMenuFlyoutItem_Click(object sender, RoutedEventArgs e)
-        {
-
+            MoreMenuFlyout.ShowAt(sender as FrameworkElement, new FlyoutShowOptions() { Placement = FlyoutPlacementMode.BottomEdgeAlignedRight });
         }
     }
 }

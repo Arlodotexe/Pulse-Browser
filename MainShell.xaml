@@ -2,12 +2,9 @@
     x:Class="Pulse_Browser.MainShell"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Pulse_Browser"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:usercontrols="using:Pulse_Browser.UserControls"
-    xmlns:helpers="using:Pulse_Browser.Helpers"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -17,11 +14,8 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <usercontrols:NavigationBar />
+        <usercontrols:NavigationBar BackButtonClicked="NavigationBar_BackButtonClicked" ForwardButtonClicked="NavigationBar_ForwardButtonClicked" RefreshButtonClicked="NavigationBar_RefreshButtonClicked" NavigationQuerySubmitted="NavigationBar_NavigationQuerySubmitted" BackButtonEnabled="{x:Bind ViewModel.BackButtonEnabled, Mode=OneWay}" ForwardButtonEnabled="{x:Bind ViewModel.ForwardButtonEnabled, Mode=OneWay}" HistoryMenuFlyoutItemButtonClicked="NavigationBar_HistoryMenuFlyoutItemButtonClicked" FavoritesMenuItemButtonClicked="NavigationBar_FavoritesMenuItemButtonClicked" SettingsMenuFlyoutItemButtonClicked="NavigationBar_SettingsMenuFlyoutItemButtonClicked" />
 
-        <Grid Grid.Row="1">
-            <Frame Loaded="AppFrame_Loaded" x:Name="AppFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-            <WebView Visibility="{x:Bind helpers:Converters.BooleanToVisibility(ViewModel.WebViewShown), Mode=OneWay}" Source="{x:Bind ViewModel.CurrentAddress, Mode=TwoWay}" />
-        </Grid>
+        <usercontrols:WebXamlView Unloaded="WebXamlView_Unloaded" Loaded="WebXamlView_Loaded" x:Name="WebXamlView" Grid.Row="1"/>
     </Grid>
 </Page>

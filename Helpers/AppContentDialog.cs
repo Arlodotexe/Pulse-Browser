@@ -13,7 +13,10 @@ namespace Pulse_Browser.Helpers
     /// </summary>
     public static class AppContentDialog
     {
-        private static readonly ContentDialog dialog = new ContentDialog();
+        private static readonly ContentDialog dialog = new ContentDialog()
+        {
+            CloseButtonText = "Close"
+        };
 
         public static bool IsOpen = false;
 

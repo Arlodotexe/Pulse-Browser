@@ -1,0 +1,43 @@
+﻿<UserControl
+    x:Class="Pulse_Browser.UserControls.History"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Pulse_Browser.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="600"
+    d:DesignWidth="400"
+    Margin="5,15,0,5">
+
+        <ListView SelectionMode="None" ItemsSource="{x:Bind ViewModel.History}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Height" Value="50" />
+                    <Setter Property="Background" Value="Transparent" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:WebHistoryEntry">
+                <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image Margin="0,0,15,0" Source="{Binding Favicon}" Grid.RowSpan="2" />
+
+                        <TextBlock Grid.Column="1" Text="{Binding WebUri}" />
+                        <TextBlock Grid.Column="1" Grid.Row="1">
+                            <Run Text="Visited:" />
+                            <Run Text="{Binding VisitedAt}" />
+                        </TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+</UserControl>

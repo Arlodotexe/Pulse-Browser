@@ -1,5 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
+using Pulse_Browser.Services;
 using System;
+using System.Web;
 using Windows.UI.Xaml.Controls;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -11,21 +13,20 @@ namespace Pulse_Browser
     /// </summary>
     public class MainShellViewModel : ViewModelBase
     {
-        private Uri currentAddress = new Uri("about:home");
-        private bool webViewShown = false;
+        private bool backButtonEnabled = false;
+        private bool forwardButtonEnabled = false;
 
-        public Uri CurrentAddress
+        public bool BackButtonEnabled
         {
-            get => currentAddress;
-            set => Set(() => this.CurrentAddress, ref currentAddress, value);
+            get => backButtonEnabled;
+            set => Set(() => BackButtonEnabled, ref backButtonEnabled, value);
         }
 
-        public bool WebViewShown
+        public bool ForwardButtonEnabled
         {
-            get => webViewShown;
-            set => Set(() => this.WebViewShown, ref webViewShown, value);
+            get => forwardButtonEnabled;
+            set => Set(() => ForwardButtonEnabled, ref forwardButtonEnabled, value);
         }
-
     }
 
     /// <summary>
@@ -33,42 +34,88 @@ namespace Pulse_Browser
     /// </summary>
     public sealed partial class MainShell : Page
     {
+        public static MainShell CurrentInstance;
         public MainShellViewModel ViewModel => DataContext as MainShellViewModel;
+        public NavigationService CurrentNavigationService;
 
         public MainShell()
         {
+            CurrentInstance = this;
+
             InitializeComponent();
-            DataContextChanged += (s, e) => this.Bindings.Update();
-
             SetupDefaultViewModel();
-
-            Services.WebNavigationService.NavigationRequested += NavigationService_NavigationRequested;
+            DataContextChanged += (s, e) => this.Bindings.Update();
         }
 
-        private void SetupDefaultViewModel()
-        {
-            DataContext = new MainShellViewModel();
-        }
+        private void SetupDefaultViewModel() => DataContext = new MainShellViewModel();
 
-        private void NavigationService_NavigationRequested(Uri address)
+        private void NavigationBar_NavigationQuerySubmitted(string query)
         {
-            if (address.ToString() == "about:home")
+            if (!string.IsNullOrEmpty(query))
             {
-                ViewModel.WebViewShown = false;
-                AppFrame.Navigate(typeof(Views.HomePage));
+                bool isUri = Uri.TryCreate(query, UriKind.Absolute, out Uri destination)
+                    && (destination.Scheme == Uri.UriSchemeHttp || destination.Scheme == Uri.UriSchemeHttps);
+
+                if (isUri)
+                {
+                    CurrentNavigationService?.Navigate(destination);
+                }
+                else
+                {
+                    Uri searchAddress = new Uri($"https://www.google.com/search?q={HttpUtility.UrlEncode(query)}");
+                    CurrentNavigationService?.Navigate(searchAddress);
+                }
             }
-            else
-            {
-                ViewModel.WebViewShown = true;
-            }
-            ViewModel.CurrentAddress = address;
         }
 
-        private void AppFrame_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void NavigationBar_BackButtonClicked()
         {
-            Frame fromFrame = sender as Frame;
+            CurrentNavigationService?.Back();
+        }
 
-            fromFrame.Navigate(typeof(Views.HomePage));
+        private void NavigationBar_ForwardButtonClicked()
+        {
+            CurrentNavigationService?.Forward();
+        }
+
+        private void NavigationBar_RefreshButtonClicked()
+        {
+            CurrentNavigationService?.Refresh();
+        }
+
+        private void WebXamlView_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            var XamlWebViewer = sender as UserControls.WebXamlView;
+
+            CurrentNavigationService = XamlWebViewer.NavigationService;
+            CurrentNavigationService.CanGoBackChanged += CurrentNavigationService_CanGoBackChanged;
+            CurrentNavigationService.CanGoForwardChanged += CurrentNavigationService_CanGoForwardChanged;
+        }
+
+        private void CurrentNavigationService_CanGoForwardChanged(bool canGoForward) => ViewModel.ForwardButtonEnabled = canGoForward;
+
+        private void CurrentNavigationService_CanGoBackChanged(bool canGoBack) => ViewModel.BackButtonEnabled = canGoBack;
+
+        private void WebXamlView_Unloaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            CurrentNavigationService.CanGoBackChanged -= CurrentNavigationService_CanGoBackChanged;
+            CurrentNavigationService.CanGoForwardChanged -= CurrentNavigationService_CanGoForwardChanged;
+            CurrentNavigationService = null;
+        }
+
+        private void NavigationBar_HistoryMenuFlyoutItemButtonClicked()
+        {
+            Helpers.AppContentDialog.OpenDialog(new UserControls.Options());
+        }
+
+        private void NavigationBar_FavoritesMenuItemButtonClicked()
+        {
+            Helpers.AppContentDialog.OpenDialog(new UserControls.Options());
+        }
+
+        private void NavigationBar_SettingsMenuFlyoutItemButtonClicked()
+        {
+            Helpers.AppContentDialog.OpenDialog(new UserControls.Options(UserControls.Options.LandingTab.Settings));
         }
     }
 }
