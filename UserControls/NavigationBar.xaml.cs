@@ -67,15 +67,9 @@ namespace Pulse_Browser.UserControls
         public event ForwardButtonClickedHandler ForwardButtonClicked;
         public delegate void ForwardButtonClickedHandler();
 
-        private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
-        {
-            NavigationQuerySubmitted?.Invoke(args.QueryText);
-        }
+        private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) => NavigationQuerySubmitted?.Invoke(args.QueryText);
 
-        private void HomeButton_Click(object sender, RoutedEventArgs e)
-        {
-            HomeButtonClicked?.Invoke();
-        }
+        private void HomeButton_Click(object sender, RoutedEventArgs e) => HomeButtonClicked?.Invoke();
 
         private void SettingsMenuFlyoutItem_Click(object sender, RoutedEventArgs e)
         {
@@ -87,19 +81,10 @@ namespace Pulse_Browser.UserControls
 
         }
 
-        private void RefreshButton_Click(object sender, RoutedEventArgs e)
-        {
-            RefreshButtonClicked?.Invoke();
-        }
+        private void RefreshButton_Click(object sender, RoutedEventArgs e) => RefreshButtonClicked?.Invoke();
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            BackButtonClicked?.Invoke();
-        }
+        private void BackButton_Click(object sender, RoutedEventArgs e) => BackButtonClicked?.Invoke();
 
-        private void ForwardButton_Click(object sender, RoutedEventArgs e)
-        {
-            ForwardButtonClicked?.Invoke();
-        }
+        private void ForwardButton_Click(object sender, RoutedEventArgs e) => ForwardButtonClicked?.Invoke();
     }
 }
