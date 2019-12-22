@@ -61,19 +61,19 @@ namespace Pulse_Browser.UserControls
 
                 if (isUri)
                 {
-                    Services.WebNavigationService.Navigate(destination);
+                    Services.NavigationService.Navigate(destination);
                 }
                 else
                 {
                     Uri searchAddress = new Uri($"https://www.google.com/search?q={HttpUtility.UrlEncode(args.QueryText)}");
-                    Services.WebNavigationService.Navigate(searchAddress);
+                    Services.NavigationService.Navigate(searchAddress);
                 }
             }
         }
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
-            Services.WebNavigationService.Navigate(new Uri("about:home"));
+            Services.NavigationService.Navigate(new Uri("about:home"));
         }
 
         private void SettingsMenuFlyoutItem_Click(object sender, RoutedEventArgs e)
@@ -88,17 +88,17 @@ namespace Pulse_Browser.UserControls
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-            Services.WebNavigationService.Refresh();
+            Services.NavigationService.Refresh();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Services.WebNavigationService.Back();
+            Services.NavigationService.Back();
         }
 
         private void ForwardButton_Click(object sender, RoutedEventArgs e)
         {
-            Services.WebNavigationService.Forward();
+            Services.NavigationService.Forward();
         }
     }
 }

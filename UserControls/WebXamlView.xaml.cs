@@ -43,24 +43,24 @@ namespace Pulse_Browser.UserControls
         {
             this.InitializeComponent();
             SetupDefaultViewModel();
-            SetupWebNavigationEvents();
+            SetupNavigationService();
 
             DataContextChanged += (s, e) => this.Bindings.Update();
 
             // Navigate to the default address so it's in the navigation stack
-            Services.WebNavigationService.Navigate(ViewModel.CurrentAddress);
+            Services.NavigationService.Navigate(ViewModel.CurrentAddress);
 
             AppWebView.NavigationStarting += AppWebView_NavigationStarting;
             AppWebView.NavigationFailed += AppWebView_NavigationFailed;
         }
         private void SetupDefaultViewModel() => DataContext = new WebXamlViewViewModel();
 
-        public void SetupWebNavigationEvents()
+        public void SetupNavigationService()
         {
-            Services.WebNavigationService.NavigationRequested += NavigationService_NavigationRequested;
-            Services.WebNavigationService.RefreshRequested += WebNavigationService_RefreshRequested;
-            Services.WebNavigationService.BackRequested += WebNavigationService_BackRequested;
-            Services.WebNavigationService.ForwardRequested += WebNavigationService_ForwardRequested;
+            Services.NavigationService.NavigationRequested += NavigationService_NavigationRequested;
+            Services.NavigationService.RefreshRequested += WebNavigationService_RefreshRequested;
+            Services.NavigationService.BackRequested += WebNavigationService_BackRequested;
+            Services.NavigationService.ForwardRequested += WebNavigationService_ForwardRequested;
         }
 
         private void AppWebView_NavigationFailed(object sender, WebViewNavigationFailedEventArgs e) => InterceptHomePage(e.Uri);

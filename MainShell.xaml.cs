@@ -45,8 +45,8 @@ namespace Pulse_Browser
 
         public void SetupWebNavigationEvents()
         {
-            Services.WebNavigationService.CanGoForwardChanged += WebNavigationService_CanGoForwardChanged;
-            Services.WebNavigationService.CanGoBackChanged += WebNavigationService_CanGoBackChanged;
+            Services.NavigationService.CanGoForwardChanged += WebNavigationService_CanGoForwardChanged;
+            Services.NavigationService.CanGoBackChanged += WebNavigationService_CanGoBackChanged;
         }
 
         private void WebNavigationService_CanGoBackChanged(bool canGoBack) => ViewModel.BackButtonEnabled = canGoBack;

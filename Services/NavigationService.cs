@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Pulse_Browser.Services
 {
-    public static class WebNavigationService
+    public static class NavigationService
     {
-        public class WebHistoryEntry
+        public class HistoryEntry
         {
             public DateTime VisitedAt { get; set; }
             public Uri Uri { get; set; }
@@ -18,10 +18,7 @@ namespace Pulse_Browser.Services
             public bool Current { get; set; } = false;
         }
 
-        /// <summary>
-        /// Represents the full web history, complete with forward, backward, and refresh navigation entries
-        /// </summary>
-        public static Stack<WebHistoryEntry> WebHistoryStack { get; set; } = new Stack<WebHistoryEntry>();
+        public static Stack<HistoryEntry> HistoryStack { get; set; } = new Stack<HistoryEntry>();
 
         public delegate void OnNavigatedEvent(Uri address);
         public static event OnNavigatedEvent NavigationRequested;
@@ -44,9 +41,9 @@ namespace Pulse_Browser.Services
         public static void Navigate(Uri address)
         {
             // Reset all entries to not current
-            foreach (var h in WebHistoryStack) h.Current = false;
+            foreach (var h in HistoryStack) h.Current = false;
 
-            WebHistoryStack.Push(new WebHistoryEntry()
+            HistoryStack.Push(new HistoryEntry()
             {
                 Uri = address,
                 VisitedAt = DateTime.Now,
@@ -66,10 +63,10 @@ namespace Pulse_Browser.Services
 
         public static void Back()
         {
-            var currentEntry = WebHistoryStack.FirstOrDefault(h => h.Current);
-            int currentIndex = WebHistoryStack.ToList().IndexOf(currentEntry);
+            var currentEntry = HistoryStack.FirstOrDefault(h => h.Current);
+            int currentIndex = HistoryStack.ToList().IndexOf(currentEntry);
 
-            var validNavigationStack = WebHistoryStack
+            var validNavigationStack = HistoryStack
                 // Transform to list so we don't affect the original stack
                 ?.ToList();
 
@@ -85,15 +82,15 @@ namespace Pulse_Browser.Services
                 return;
             }
 
-            foreach (var h in WebHistoryStack) h.Current = false;
+            foreach (var h in HistoryStack) h.Current = false;
 
             // This is the entry we're navigating to, so it should be marked as current
-            WebHistoryStack.First(h => h.VisitedAt == newEntry.VisitedAt).Current = true;
-            int newHistoryItemIndexOnStack = WebHistoryStack.ToList().FindIndex(h => h.VisitedAt == newEntry.VisitedAt);
+            HistoryStack.First(h => h.VisitedAt == newEntry.VisitedAt).Current = true;
+            int newHistoryItemIndexOnStack = HistoryStack.ToList().FindIndex(h => h.VisitedAt == newEntry.VisitedAt);
 
             if (validNavigationStack != null)
             {
-                CanGoBackChanged?.Invoke(newHistoryItemIndexOnStack + 1 < WebHistoryStack.Count());
+                CanGoBackChanged?.Invoke(newHistoryItemIndexOnStack + 1 < HistoryStack.Count());
                 CanGoForwardChanged?.Invoke(true);
 
                 BackRequested?.Invoke(newEntry.Uri);
@@ -102,11 +99,11 @@ namespace Pulse_Browser.Services
 
         public static void Forward()
         {
-            var currentEntry = WebHistoryStack.FirstOrDefault(h => h.Current);
+            var currentEntry = HistoryStack.FirstOrDefault(h => h.Current);
 
-            int currentIndex = WebHistoryStack.ToList().IndexOf(currentEntry);
+            int currentIndex = HistoryStack.ToList().IndexOf(currentEntry);
 
-            var validNavigationStack = WebHistoryStack
+            var validNavigationStack = HistoryStack
                 // Transform to list so we don't affect the original stack
                 ?.ToList();
 
@@ -122,10 +119,10 @@ namespace Pulse_Browser.Services
                 return;
             }
 
-            foreach (var h in WebHistoryStack) h.Current = false;
+            foreach (var h in HistoryStack) h.Current = false;
 
             // This is the entry we're navigating to, so it should be marked as current
-            WebHistoryStack.First(h => h.VisitedAt == newEntry.VisitedAt).Current = true;
+            HistoryStack.First(h => h.VisitedAt == newEntry.VisitedAt).Current = true;
 
             if (newEntry != null)
             {
