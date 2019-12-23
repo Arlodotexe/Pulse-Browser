@@ -9,12 +9,14 @@
     Background="{ThemeResource SystemControlChromeMediumAcrylicWindowMediumBrush}">
 
     <Grid>
-        <ListView ItemsSource="{x:Bind ViewModel.Bookmarks, Mode=OneWay}">
-            <ListView.ItemTemplate>
+        <GridView ItemsSource="{x:Bind ViewModel.Bookmarks, Mode=OneWay}">
+            <GridView.ItemTemplate>
                 <DataTemplate x:DataType="services:Bookmark">
-                    <Grid></Grid>
+                    <Grid>
+                        <Image Height="55" Source="{x:Bind Icon, Mode=OneWay}" />
+                    </Grid>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </GridView.ItemTemplate>
+        </GridView>
     </Grid>
 </Page>
