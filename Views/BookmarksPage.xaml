@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:services="using:Pulse_Browser.Services"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource SystemControlChromeMediumAcrylicWindowMediumBrush}">
 
@@ -17,16 +18,20 @@
         <GridView SelectionMode="None" Grid.Row="1" Width="550" HorizontalAlignment="Center" ItemsSource="{x:Bind ViewModel.Bookmarks, Mode=OneWay}">
             <GridView.ItemContainerStyle>
                 <Style TargetType="FrameworkElement">
-                    <Setter Property="Margin" Value="0,0,42,40" />
+                    <Setter Property="Margin" Value="0,0,22,40" />
                 </Style>
             </GridView.ItemContainerStyle>
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="services:Bookmark">
-                    <Border Background="White" CornerRadius="100" Padding="10">
-                        <Border Background="White" CornerRadius="100">
-                            <Image Height="75" Source="{x:Bind Icon, Mode=OneWay}" />
+                    <Grid CornerRadius="100">
+                        <controls:DropShadowPanel HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"  Margin="0,0,7,8" CornerRadius="100" OffsetY="8" OffsetX="7" BlurRadius="5" ShadowOpacity="0.3" Color="Black">
+                        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White" CornerRadius="100" Padding="10">
+                            <Border Background="White" CornerRadius="100">
+                                <Image Height="75" Source="{x:Bind Icon, Mode=OneWay}" />
+                            </Border>
                         </Border>
-                    </Border>
+                    </controls:DropShadowPanel>
+                    </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
