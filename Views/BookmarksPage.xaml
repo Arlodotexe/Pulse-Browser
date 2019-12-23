@@ -7,7 +7,7 @@
     xmlns:services="using:Pulse_Browser.Services"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
-    Background="{ThemeResource SystemControlChromeMediumAcrylicWindowMediumBrush}">
+    Background="{ThemeResource SystemControlAltMediumLowAcrylicWindowMediumBrush}">
 
     <Grid VerticalAlignment="Center">
         <Grid.RowDefinitions>
