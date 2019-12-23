@@ -14,12 +14,19 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <TextBlock Text="Bookmarks" Margin="0,0,0,40" FontSize="42" FontWeight="SemiLight" HorizontalAlignment="Center" />
-        <GridView Grid.Row="1" Width="300" HorizontalAlignment="Center" ItemsSource="{x:Bind ViewModel.Bookmarks, Mode=OneWay}">
+        <GridView SelectionMode="None" Grid.Row="1" Width="550" HorizontalAlignment="Center" ItemsSource="{x:Bind ViewModel.Bookmarks, Mode=OneWay}">
+            <GridView.ItemContainerStyle>
+                <Style TargetType="FrameworkElement">
+                    <Setter Property="Margin" Value="0,0,42,40" />
+                </Style>
+            </GridView.ItemContainerStyle>
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="services:Bookmark">
-                    <Grid CornerRadius="100">
-                        <Image Height="55" Source="{x:Bind Icon, Mode=OneWay}" />
-                    </Grid>
+                    <Border Background="White" CornerRadius="100" Padding="10">
+                        <Border Background="White" CornerRadius="100">
+                            <Image Height="75" Source="{x:Bind Icon, Mode=OneWay}" />
+                        </Border>
+                    </Border>
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
