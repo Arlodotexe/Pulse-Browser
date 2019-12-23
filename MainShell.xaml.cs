@@ -45,6 +45,18 @@ namespace Pulse_Browser
             InitializeComponent();
             SetupDefaultViewModel();
             DataContextChanged += (s, e) => this.Bindings.Update();
+
+            SetupTheme();
+        }
+
+        private void SetupTheme()
+        {
+            var titleBar = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar;
+
+            // Set active window colors
+            titleBar.ForegroundColor = titleBar.ButtonForegroundColor = Windows.UI.Colors.White;
+            titleBar.BackgroundColor = titleBar.ButtonBackgroundColor = Windows.UI.Color.FromArgb(255, 0, 120, 215);
+            
         }
 
         private void SetupDefaultViewModel() => DataContext = new MainShellViewModel();
