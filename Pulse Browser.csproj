@@ -119,12 +119,15 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\System.Threading.Tasks\AsyncMutex.cs" />
     <Compile Include="Helpers\AppContentDialog.cs" />
     <Compile Include="Helpers\Converters.cs" />
+    <Compile Include="Helpers\Storage.cs" />
     <Compile Include="MainShell.xaml.cs">
       <DependentUpon>MainShell.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BookmarksService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="UserControls\History.xaml.cs">
       <DependentUpon>History.xaml</DependentUpon>
@@ -138,8 +141,8 @@
     <Compile Include="UserControls\WebXamlView.xaml.cs">
       <DependentUpon>WebXamlView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\HomePage.xaml.cs">
-      <DependentUpon>HomePage.xaml</DependentUpon>
+    <Compile Include="Views\BookmarksPage.xaml.cs">
+      <DependentUpon>BookmarksPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -182,7 +185,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\HomePage.xaml">
+    <Page Include="Views\BookmarksPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
