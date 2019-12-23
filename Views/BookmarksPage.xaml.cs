@@ -73,6 +73,11 @@ namespace Pulse_Browser.Views
                 },
                 new Bookmark()
                 {
+                     Uri = new Uri("https://linkedin.com/"),
+                     Icon = new BitmapImage() {UriSource = new Uri($"http://www.google.com/s2/favicons?domain=linkedin.com")},
+                },
+                new Bookmark()
+                {
                      Uri = new Uri("https://facebook.com/"),
                      Icon = new BitmapImage() {UriSource = new Uri($"http://www.google.com/s2/favicons?domain=facebook.com")},
                 },
