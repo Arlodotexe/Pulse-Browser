@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media;
 
 namespace Pulse_Browser.Services
 {
     public class Bookmark
     {
         public Uri Uri { get; set; }
-        public Uri Icon { get; set; }
+        public ImageSource Icon { get; set; }
     }
 
     public static class BookmarksService
