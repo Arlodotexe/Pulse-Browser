@@ -43,6 +43,9 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <TextBlock x:Name="NoHistoryMessage" x:Load="{x:Bind Helpers:Converters.CollectionIsEmpty(ViewModel.History), Mode=OneWay}" Text="No history" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="NoHistoryMessage" x:Load="{x:Bind Helpers:Converters.CollectionIsEmpty(ViewModel.History), Mode=OneWay}">
+            <TextBlock Text="No history" FontSize="22" TextAlignment="Center" />
+            <TextBlock Text="Let's go make some" TextAlignment="Center" FontSize="14" Opacity="0.5" />
+        </StackPanel>
     </Grid>
 </UserControl>
