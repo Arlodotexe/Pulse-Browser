@@ -428,11 +428,11 @@
                     <TextBlock Text="{Binding}" FontSize="15" />
                 </DataTemplate>
             </Pivot.HeaderTemplate>
-            
-            <PivotItem Header="History" Background="{ThemeResource SystemChromeAltHighColor}" Height="600">
+
+            <PivotItem Header="History" Background="{ThemeResource SystemChromeMediumColor}" Height="600">
                     <local:History />
             </PivotItem>
-            <PivotItem Header="Settings" Background="{ThemeResource SystemChromeAltHighColor}" Height="600">
+            <PivotItem Header="Settings" Background="{ThemeResource SystemChromeMediumColor}" Height="600">
                 <local:Settings />
             </PivotItem>
         </Pivot>
