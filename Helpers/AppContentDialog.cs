@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pulse_Browser.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,10 @@ namespace Pulse_Browser.Helpers
         public static async void OpenDialog(FrameworkElement content)
         {
             dialog.Content = content;
+
+            var PrefferedTheme = SettingsService.GetLocal<ElementTheme>(SettingKeys.PrefferedTheme);
+            dialog.RequestedTheme = PrefferedTheme;
+
             if (!IsOpen)
             {
                 await dialog.ShowAsync();
@@ -32,6 +37,10 @@ namespace Pulse_Browser.Helpers
         public static async Task OpenDialogAsync(FrameworkElement content)
         {
             dialog.Content = content;
+
+            var PrefferedTheme = SettingsService.GetLocal<ElementTheme>(SettingKeys.PrefferedTheme);
+            dialog.RequestedTheme = PrefferedTheme;
+
             if (!IsOpen)
             {
                 await dialog.ShowAsync();
