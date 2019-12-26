@@ -5,12 +5,14 @@
     xmlns:local="using:Pulse_Browser.UserControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Helpers="using:Pulse_Browser.Helpers"
     mc:Ignorable="d"
     d:DesignHeight="600"
     d:DesignWidth="400"
     Margin="5,15,0,5">
 
-        <ListView SelectionMode="None" ItemsSource="{x:Bind ViewModel.History}">
+    <Grid>
+        <ListView x:Load="{x:Bind Helpers:Converters.CollectionIsNotEmpty(ViewModel.History), Mode=OneWay}" x:Name="HistoryListView" SelectionMode="None" ItemsSource="{x:Bind ViewModel.History}">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="Height" Value="50" />
@@ -19,7 +21,7 @@
             </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:WebHistoryEntry">
-                <Grid>
+                    <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
@@ -40,4 +42,10 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="NoHistoryMessage" x:Load="{x:Bind Helpers:Converters.CollectionIsEmpty(ViewModel.History), Mode=OneWay}">
+            <TextBlock Text="No history" FontSize="22" TextAlignment="Center" />
+            <TextBlock Text="Let's go make some" TextAlignment="Center" FontSize="14" Opacity="0.5" />
+        </StackPanel>
+    </Grid>
 </UserControl>

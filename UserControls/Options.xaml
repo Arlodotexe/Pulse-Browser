@@ -8,7 +8,8 @@
     mc:Ignorable="d"
     d:DesignHeight="700"
     d:DesignWidth="550" 
-    Height="700">
+    Height="700"
+    Background="{ThemeResource AppBarBackgroundThemeBrush}">
     
     <UserControl.Resources>
         <Style TargetType="PivotHeaderItem" x:Key="headerItemStyle">
@@ -16,7 +17,7 @@
             <Setter Property="FontFamily" Value="{ThemeResource PivotHeaderItemFontFamily}" />
             <Setter Property="FontWeight" Value="{ThemeResource PivotHeaderItemThemeFontWeight}" />
             <Setter Property="CharacterSpacing" Value="{ThemeResource PivotHeaderItemCharacterSpacing}" />
-            <Setter Property="Background" Value="{ThemeResource SystemChromeAltHighColor}" />
+            <Setter Property="Background" Value="{ThemeResource SystemChromeMediumColor}" />
             <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
             <Setter Property="Padding" Value="{ThemeResource PivotHeaderItemMargin}" />
             <Setter Property="Height" Value="48" />
@@ -81,7 +82,7 @@
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Grid"
                                                Storyboard.TargetProperty="Background" >
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemChromeAltHighColor}" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemChromeMediumColor}" />
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -107,9 +108,13 @@
                                                 Storyboard.TargetProperty="Foreground" >
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseMediumHighBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                               Storyboard.TargetProperty="FontWeight" >
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="SemiBold" />
+                                            </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Grid"
                                                Storyboard.TargetProperty="Background" >
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemChromeAltHighColor}" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemChromeMediumColor}" />
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -119,9 +124,13 @@
                                                Storyboard.TargetProperty="Foreground" >
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseMediumHighBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                               Storyboard.TargetProperty="FontWeight" >
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="SemiBold" />
+                                            </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Grid"
                                                Storyboard.TargetProperty="Background" >
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemChromeAltHighColor}" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemChromeMediumColor}" />
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -131,9 +140,13 @@
                                                Storyboard.TargetProperty="Foreground" >
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseMediumHighBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                               Storyboard.TargetProperty="FontWeight" >
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="SemiBold" />
+                                            </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Grid"
                                                Storyboard.TargetProperty="Background" >
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemChromeAltHighColor}" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemChromeMediumColor}" />
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -420,12 +433,12 @@
                     <TextBlock Text="{Binding}" FontSize="15" />
                 </DataTemplate>
             </Pivot.HeaderTemplate>
-            
-            <PivotItem Header="History" Background="{ThemeResource SystemChromeAltHighColor}" Height="600">
+
+            <PivotItem Header="History" Background="{ThemeResource SystemChromeMediumColor}" Height="600">
                     <local:History />
             </PivotItem>
-            <PivotItem Header="Settings" Background="{ThemeResource SystemChromeAltHighColor}" Height="600">
-    
+            <PivotItem Header="Settings" Background="{ThemeResource SystemChromeMediumColor}" Height="600">
+                <local:Settings />
             </PivotItem>
         </Pivot>
     </StackPanel>

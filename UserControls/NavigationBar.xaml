@@ -254,7 +254,7 @@
                                     <VisualState x:Name="Portrait"/>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            <TextBox x:Name="TextBox" ScrollViewer.BringIntoViewOnFocusChange="False" Description="{TemplateBinding Description}" DesiredCandidateWindowAlignment="BottomEdge" Header="{TemplateBinding Header}" Margin="0" PlaceholderText="{TemplateBinding PlaceholderText}" Style="{TemplateBinding TextBoxStyle}" UseSystemFocusVisuals="{TemplateBinding UseSystemFocusVisuals}" Width="{TemplateBinding Width}" Canvas.ZIndex="0"/>
+                            <TextBox x:Name="TextBox" ScrollViewer.BringIntoViewOnFocusChange="False" Description="{TemplateBinding Description}" DesiredCandidateWindowAlignment="BottomEdge" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Header="{TemplateBinding Header}" Margin="0" PlaceholderText="{TemplateBinding PlaceholderText}" Style="{TemplateBinding TextBoxStyle}" UseSystemFocusVisuals="{TemplateBinding UseSystemFocusVisuals}" Width="{TemplateBinding Width}" Canvas.ZIndex="0"/>
                             <Popup x:Name="SuggestionsPopup">
                                 <Border x:Name="SuggestionsContainer">
                                     <ListView x:Name="SuggestionsList" Background="{ThemeResource AutoSuggestBoxSuggestionsListBackground}" BorderThickness="{ThemeResource AutoSuggestListBorderThemeThickness}" BorderBrush="{ThemeResource AutoSuggestBoxSuggestionsListBorderBrush}" DisplayMemberPath="{TemplateBinding DisplayMemberPath}" ItemContainerStyle="{TemplateBinding ItemContainerStyle}" ItemTemplate="{TemplateBinding ItemTemplate}" IsItemClickEnabled="True" ItemTemplateSelector="{TemplateBinding ItemTemplateSelector}" MaxHeight="{ThemeResource AutoSuggestListMaxHeight}" Margin="{ThemeResource AutoSuggestListMargin}" Padding="{ThemeResource AutoSuggestListPadding}"/>
@@ -267,7 +267,7 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid Height="40" Background="{ThemeResource SystemControlBackgroundAltMediumBrush}">
+    <Grid Height="40" Background="{ThemeResource AppBarBackgroundThemeBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
@@ -291,10 +291,10 @@
         </Button>
 
         <Button Width="40" Height="40" Grid.Column="3" Style="{StaticResource TransparentSquareButton}" Click="HomeButton_Click">
-            <FontIcon FontSize="16" FontFamily="Segoe MDL2 Assets" Glyph="&#xE80F;" />
+            <FontIcon FontSize="18" FontFamily="Segoe MDL2 Assets" Glyph="&#xE80F;" />
         </Button>
 
-        <AutoSuggestBox QuerySubmitted="AutoSuggestBox_QuerySubmitted" Style="{StaticResource NavigationBox}" Grid.Column="4" PlaceholderText="Search or enter a web address" VerticalAlignment="Center" Margin="5,0,5,0" />
+        <AutoSuggestBox QuerySubmitted="AutoSuggestBox_QuerySubmitted" Style="{StaticResource NavigationBox}" Grid.Column="4" PlaceholderText="Search or enter a web address" VerticalAlignment="Center" Margin="20,0,20,0" />
 
 
         <Button Width="40" Height="40" Grid.Column="5" Style="{StaticResource TransparentSquareButton}" Click="FavoritesButton_Click">
@@ -306,7 +306,7 @@
 
             <FlyoutBase.AttachedFlyout>
                 <MenuFlyout x:Name="MoreMenuFlyout">
-                    <MenuFlyoutItem Width="250" Click="HistoryMenuFlyoutItem_Click" Text="History">
+                    <MenuFlyoutItem Width="300" Click="HistoryMenuFlyoutItem_Click" Text="History">
                         <MenuFlyoutItem.Icon>
                             <FontIcon Glyph="&#xE81C;" FontFamily="Segoe MDL2 Assets" />
                         </MenuFlyoutItem.Icon>
@@ -315,7 +315,7 @@
                         </MenuFlyoutItem.KeyboardAccelerators>
                     </MenuFlyoutItem>
 
-                    <MenuFlyoutItem Width="250" Click="SettingsMenuFlyoutItem_Click" Text="Settings">
+                    <MenuFlyoutItem Width="300" Click="SettingsMenuFlyoutItem_Click" Text="Settings">
                         <MenuFlyoutItem.Icon>
                             <FontIcon Glyph="&#xE713;" FontFamily="Segoe MDL2 Assets" />
                         </MenuFlyoutItem.Icon>
