@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pulse_Browser.Services;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -70,6 +71,7 @@ namespace Pulse_Browser
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
+                SetupTheme();
             }
         }
 
@@ -95,6 +97,15 @@ namespace Pulse_Browser
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        private void SetupTheme()
+        {
+            var PrefferedTheme = SettingsService.GetLocal<ElementTheme>(SettingKeys.PrefferedTheme);
+            if (Window.Current.Content is FrameworkElement frameworkElement)
+            {
+                frameworkElement.RequestedTheme = PrefferedTheme;
+            }
         }
     }
 }
