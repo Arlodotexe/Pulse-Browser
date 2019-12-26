@@ -433,7 +433,7 @@
                     <local:History />
             </PivotItem>
             <PivotItem Header="Settings" Background="{ThemeResource SystemChromeAltHighColor}" Height="600">
-    
+                <local:Settings />
             </PivotItem>
         </Pivot>
     </StackPanel>
