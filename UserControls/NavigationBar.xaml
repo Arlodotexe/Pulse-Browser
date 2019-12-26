@@ -306,7 +306,7 @@
 
             <FlyoutBase.AttachedFlyout>
                 <MenuFlyout x:Name="MoreMenuFlyout">
-                    <MenuFlyoutItem Width="250" Click="HistoryMenuFlyoutItem_Click" Text="History">
+                    <MenuFlyoutItem Width="300" Click="HistoryMenuFlyoutItem_Click" Text="History">
                         <MenuFlyoutItem.Icon>
                             <FontIcon Glyph="&#xE81C;" FontFamily="Segoe MDL2 Assets" />
                         </MenuFlyoutItem.Icon>
@@ -315,7 +315,7 @@
                         </MenuFlyoutItem.KeyboardAccelerators>
                     </MenuFlyoutItem>
 
-                    <MenuFlyoutItem Width="250" Click="SettingsMenuFlyoutItem_Click" Text="Settings">
+                    <MenuFlyoutItem Width="300" Click="SettingsMenuFlyoutItem_Click" Text="Settings">
                         <MenuFlyoutItem.Icon>
                             <FontIcon Glyph="&#xE713;" FontFamily="Segoe MDL2 Assets" />
                         </MenuFlyoutItem.Icon>
