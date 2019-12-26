@@ -14,7 +14,7 @@ namespace Pulse_Browser.Helpers
     /// </summary>
     public static class AppContentDialog
     {
-        private static readonly ContentDialog dialog = new ContentDialog()
+        public static readonly ContentDialog CurrentDialog = new ContentDialog()
         {
             CloseButtonText = "Close"
         };
@@ -23,33 +23,33 @@ namespace Pulse_Browser.Helpers
 
         public static async void OpenDialog(FrameworkElement content)
         {
-            dialog.Content = content;
+            CurrentDialog.Content = content;
 
             var PrefferedTheme = SettingsService.GetLocal<ElementTheme>(SettingKeys.PrefferedTheme);
-            dialog.RequestedTheme = PrefferedTheme;
+            CurrentDialog.RequestedTheme = PrefferedTheme;
 
             if (!IsOpen)
             {
-                await dialog.ShowAsync();
+                await CurrentDialog.ShowAsync();
             }
         }
 
         public static async Task OpenDialogAsync(FrameworkElement content)
         {
-            dialog.Content = content;
+            CurrentDialog.Content = content;
 
             var PrefferedTheme = SettingsService.GetLocal<ElementTheme>(SettingKeys.PrefferedTheme);
-            dialog.RequestedTheme = PrefferedTheme;
+            CurrentDialog.RequestedTheme = PrefferedTheme;
 
             if (!IsOpen)
             {
-                await dialog.ShowAsync();
+                await CurrentDialog.ShowAsync();
             }
         }
 
         public static void Hide()
         {
-            dialog.Hide();
+            CurrentDialog.Hide();
         }
     }
 }

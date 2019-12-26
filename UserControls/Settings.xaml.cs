@@ -34,6 +34,7 @@ namespace Pulse_Browser.UserControls
             if (Window.Current.Content is FrameworkElement frameworkElement)
             {
                 frameworkElement.RequestedTheme = ElementTheme.Default;
+                Helpers.AppContentDialog.CurrentDialog.RequestedTheme = ElementTheme.Default;
             }
         }
 
@@ -43,6 +44,7 @@ namespace Pulse_Browser.UserControls
             if (Window.Current.Content is FrameworkElement frameworkElement)
             {
                 frameworkElement.RequestedTheme = ElementTheme.Dark;
+                Helpers.AppContentDialog.CurrentDialog.RequestedTheme = ElementTheme.Dark;
             }
         }
 
@@ -52,6 +54,7 @@ namespace Pulse_Browser.UserControls
             if (Window.Current.Content is FrameworkElement frameworkElement)
             {
                 frameworkElement.RequestedTheme = ElementTheme.Light;
+                Helpers.AppContentDialog.CurrentDialog.RequestedTheme = ElementTheme.Light;
             }
         }
         #endregion
