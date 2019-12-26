@@ -8,7 +8,8 @@
     mc:Ignorable="d"
     d:DesignHeight="700"
     d:DesignWidth="550" 
-    Height="700">
+    Height="700"
+    Background="{ThemeResource AppBarBackgroundThemeBrush}">
     
     <UserControl.Resources>
         <Style TargetType="PivotHeaderItem" x:Key="headerItemStyle">

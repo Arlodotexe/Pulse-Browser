@@ -5,16 +5,19 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:usercontrols="using:Pulse_Browser.UserControls"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource AppBarBackgroundThemeBrush}">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <usercontrols:NavigationBar BackButtonClicked="NavigationBar_BackButtonClicked" ForwardButtonClicked="NavigationBar_ForwardButtonClicked" RefreshButtonClicked="NavigationBar_RefreshButtonClicked" NavigationQuerySubmitted="NavigationBar_NavigationQuerySubmitted" BackButtonEnabled="{x:Bind ViewModel.BackButtonEnabled, Mode=OneWay}" ForwardButtonEnabled="{x:Bind ViewModel.ForwardButtonEnabled, Mode=OneWay}" HistoryMenuFlyoutItemButtonClicked="NavigationBar_HistoryMenuFlyoutItemButtonClicked" FavoritesMenuItemButtonClicked="NavigationBar_FavoritesMenuItemButtonClicked" SettingsMenuFlyoutItemButtonClicked="NavigationBar_SettingsMenuFlyoutItemButtonClicked" />
+        <controls:DropShadowPanel Canvas.ZIndex="1" Color="Black" ShadowOpacity="0.5" BlurRadius="15" OffsetY="5" HorizontalContentAlignment="Stretch">
+            <usercontrols:NavigationBar BackButtonClicked="NavigationBar_BackButtonClicked" ForwardButtonClicked="NavigationBar_ForwardButtonClicked" RefreshButtonClicked="NavigationBar_RefreshButtonClicked" NavigationQuerySubmitted="NavigationBar_NavigationQuerySubmitted" BackButtonEnabled="{x:Bind ViewModel.BackButtonEnabled, Mode=OneWay}" ForwardButtonEnabled="{x:Bind ViewModel.ForwardButtonEnabled, Mode=OneWay}" HistoryMenuFlyoutItemButtonClicked="NavigationBar_HistoryMenuFlyoutItemButtonClicked" FavoritesMenuItemButtonClicked="NavigationBar_FavoritesMenuItemButtonClicked" SettingsMenuFlyoutItemButtonClicked="NavigationBar_SettingsMenuFlyoutItemButtonClicked" />
+        </controls:DropShadowPanel>
 
         <usercontrols:WebXamlView Unloaded="WebXamlView_Unloaded" Loaded="WebXamlView_Loaded" x:Name="WebXamlView" Grid.Row="1"/>
     </Grid>

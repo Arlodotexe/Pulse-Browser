@@ -267,7 +267,7 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid Height="40">
+    <Grid Height="40" Background="{ThemeResource AppBarBackgroundThemeBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
