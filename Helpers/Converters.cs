@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,5 +14,12 @@ namespace Pulse_Browser.Helpers
         {
             return boolean ? Visibility.Visible : Visibility.Collapsed;
         }
+
+        public static bool CollectionIsEmpty(IEnumerable<object> collection) => !collection.Any();
+
+        public static bool CollectionIsNotEmpty(IEnumerable<object> collection) => collection.Any();
+        public static bool CollectionIsEmpty(ObservableCollection<object> collection) => !collection.Any();
+
+        public static bool CollectionIsNotEmpty(ObservableCollection<object> collection) => collection.Any();
     }
 }
