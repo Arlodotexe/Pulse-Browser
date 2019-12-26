@@ -16,7 +16,7 @@
             <Setter Property="FontFamily" Value="{ThemeResource PivotHeaderItemFontFamily}" />
             <Setter Property="FontWeight" Value="{ThemeResource PivotHeaderItemThemeFontWeight}" />
             <Setter Property="CharacterSpacing" Value="{ThemeResource PivotHeaderItemCharacterSpacing}" />
-            <Setter Property="Background" Value="{ThemeResource SystemChromeAltHighColor}" />
+            <Setter Property="Background" Value="{ThemeResource SystemChromeMediumColor}" />
             <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
             <Setter Property="Padding" Value="{ThemeResource PivotHeaderItemMargin}" />
             <Setter Property="Height" Value="48" />
@@ -81,7 +81,7 @@
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Grid"
                                                Storyboard.TargetProperty="Background" >
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemChromeAltHighColor}" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemChromeMediumColor}" />
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -109,7 +109,7 @@
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Grid"
                                                Storyboard.TargetProperty="Background" >
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemChromeAltHighColor}" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemChromeMediumColor}" />
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -121,7 +121,7 @@
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Grid"
                                                Storyboard.TargetProperty="Background" >
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemChromeAltHighColor}" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemChromeMediumColor}" />
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -133,7 +133,7 @@
                                             </ObjectAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Grid"
                                                Storyboard.TargetProperty="Background" >
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemChromeAltHighColor}" />
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemChromeMediumColor}" />
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
