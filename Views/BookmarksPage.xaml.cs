@@ -2,6 +2,7 @@
 using Pulse_Browser.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -23,15 +24,15 @@ namespace Pulse_Browser.Views
 {
     public class BookmarksPageViewModel : ViewModelBase
     {
-        private List<Bookmark> _bookmarks;
+        private ObservableCollection<Bookmark> _bookmarks;
 
-        public List<Bookmark> Bookmarks
+        public ObservableCollection<Bookmark> Bookmarks
         {
             get => _bookmarks;
             set
             {
                 // An empty bookmark will look and behave like a "new bookmark" button
-                if(value?.Last().Icon != null && value?.Last().Uri != null) value.Add(new Bookmark());
+                if (value?.Last().Icon != null && value?.Last().Uri != null) value.Add(new Bookmark());
                 Set(() => Bookmarks, ref _bookmarks, value);
             }
         }
@@ -56,18 +57,18 @@ namespace Pulse_Browser.Views
 
         private void BookmarksService_BookmarkAdded(Bookmark bookmark)
         {
-            ViewModel.Bookmarks.Insert(0, bookmark);
+            ViewModel.Bookmarks.Add(bookmark);
         }
 
         private async void RestoreBookmarks()
         {
-            ViewModel.Bookmarks = await BookmarksService.GetBookmarks();
+            ViewModel.Bookmarks = new ObservableCollection<Bookmark>(await BookmarksService.GetBookmarks());
         }
 
 
         private void PopulateDesignModeBookmarks()
         {
-            ViewModel.Bookmarks = new List<Bookmark>()
+            ViewModel.Bookmarks = new ObservableCollection<Bookmark>()
             {
                 new Bookmark()
                 {
@@ -115,11 +116,6 @@ namespace Pulse_Browser.Views
             MainShell.CurrentInstance.CurrentNavigationService.Navigate(dataContext.Uri);
         }
 
-        private async void AddNewBookmark(Bookmark bookmark)
-        {
-            ViewModel.Bookmarks.Insert(0, bookmark);
-            await BookmarksService.AddBookmark(bookmark);
-        }
 
         private void Grid_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
