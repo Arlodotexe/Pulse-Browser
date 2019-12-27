@@ -28,7 +28,12 @@ namespace Pulse_Browser.Views
         public List<Bookmark> Bookmarks
         {
             get => _bookmarks;
-            set => Set(() => Bookmarks, ref _bookmarks, value);
+            set
+            {
+                // An empty bookmark will look and behave like a "new bookmark" button
+                if(value?.Last().Icon != null && value?.Last().Uri != null) value.Add(new Bookmark());
+                Set(() => Bookmarks, ref _bookmarks, value);
+            }
         }
     }
 
