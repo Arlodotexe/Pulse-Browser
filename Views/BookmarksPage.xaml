@@ -12,12 +12,15 @@
     mc:Ignorable="d"
     Background="{ThemeResource SystemControlAltMediumLowAcrylicWindowMediumBrush}">
 
-    <Grid VerticalAlignment="Center">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="2*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBlock Text="Bookmarks" Margin="0,0,0,40" FontSize="42" FontWeight="SemiLight" HorizontalAlignment="Center" />
+
+        <TextBlock Text="Bookmarks" FontSize="44" FontWeight="SemiLight" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
         <GridView SelectionMode="None" Grid.Row="1" Width="550" HorizontalAlignment="Center" ItemsSource="{x:Bind ViewModel.Bookmarks, Mode=OneWay}">
             <GridView.ItemContainerStyle>
                 <Style TargetType="FrameworkElement">
