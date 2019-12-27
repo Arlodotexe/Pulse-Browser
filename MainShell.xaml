@@ -16,7 +16,8 @@
         </Grid.RowDefinitions>
 
         <controls:DropShadowPanel Canvas.ZIndex="1" Color="Black" ShadowOpacity="0.45" BlurRadius="25" OffsetY="3" HorizontalContentAlignment="Stretch">
-            <usercontrols:NavigationBar BackButtonClicked="NavigationBar_BackButtonClicked" ForwardButtonClicked="NavigationBar_ForwardButtonClicked" RefreshButtonClicked="NavigationBar_RefreshButtonClicked" NavigationQuerySubmitted="NavigationBar_NavigationQuerySubmitted" BackButtonEnabled="{x:Bind ViewModel.BackButtonEnabled, Mode=OneWay}" ForwardButtonEnabled="{x:Bind ViewModel.ForwardButtonEnabled, Mode=OneWay}" HistoryMenuFlyoutItemButtonClicked="NavigationBar_HistoryMenuFlyoutItemButtonClicked" FavoritesMenuItemButtonClicked="NavigationBar_FavoritesMenuItemButtonClicked" SettingsMenuFlyoutItemButtonClicked="NavigationBar_SettingsMenuFlyoutItemButtonClicked" />
+            <usercontrols:NavigationBar BackButtonClicked="NavigationBar_BackButtonClicked" 
+                                        HomeButtonClicked="NavigationBar_HomeButtonClicked" ForwardButtonClicked="NavigationBar_ForwardButtonClicked" RefreshButtonClicked="NavigationBar_RefreshButtonClicked" NavigationQuerySubmitted="NavigationBar_NavigationQuerySubmitted" BackButtonEnabled="{x:Bind ViewModel.BackButtonEnabled, Mode=OneWay}" ForwardButtonEnabled="{x:Bind ViewModel.ForwardButtonEnabled, Mode=OneWay}" HistoryMenuFlyoutItemButtonClicked="NavigationBar_HistoryMenuFlyoutItemButtonClicked" FavoritesMenuItemButtonClicked="NavigationBar_FavoritesMenuItemButtonClicked" SettingsMenuFlyoutItemButtonClicked="NavigationBar_SettingsMenuFlyoutItemButtonClicked" />
         </controls:DropShadowPanel>
 
         <usercontrols:WebXamlView Unloaded="WebXamlView_Unloaded" Loaded="WebXamlView_Loaded" x:Name="WebXamlView" Grid.Row="1"/>

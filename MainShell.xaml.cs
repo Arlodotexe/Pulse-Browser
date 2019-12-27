@@ -129,5 +129,10 @@ namespace Pulse_Browser
         {
             Helpers.AppContentDialog.OpenDialog(new UserControls.Options(UserControls.Options.LandingTab.Settings));
         }
+
+        private void NavigationBar_HomeButtonClicked()
+        {
+            CurrentNavigationService.Navigate(typeof(Views.BookmarksPage));
+        }
     }
 }

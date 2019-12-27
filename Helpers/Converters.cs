@@ -15,6 +15,10 @@ namespace Pulse_Browser.Helpers
             return boolean ? Visibility.Visible : Visibility.Collapsed;
         }
 
+        public static bool IsDefined(object x) => x != null;
+
+        public static bool IsNotDefined(object x) => x is null;
+
         public static bool CollectionIsEmpty(IEnumerable<object> collection) => !collection.Any();
 
         public static bool CollectionIsNotEmpty(IEnumerable<object> collection) => collection.Any();

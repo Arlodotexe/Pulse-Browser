@@ -2,9 +2,11 @@
 using Pulse_Browser.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,12 +24,17 @@ namespace Pulse_Browser.Views
 {
     public class BookmarksPageViewModel : ViewModelBase
     {
-        private List<Bookmark> _bookmarks;
+        private ObservableCollection<Bookmark> _bookmarks;
 
-        public List<Bookmark> Bookmarks
+        public ObservableCollection<Bookmark> Bookmarks
         {
             get => _bookmarks;
-            set => Set(() => Bookmarks, ref _bookmarks, value);
+            set
+            {
+                // An empty bookmark will look and behave like a "new bookmark" button
+                if (value?.Last().Icon != null && value?.Last().Uri != null) value.Add(new Bookmark());
+                Set(() => Bookmarks, ref _bookmarks, value);
+            }
         }
     }
 
@@ -42,14 +49,26 @@ namespace Pulse_Browser.Views
             this.InitializeComponent();
             DataContext = new BookmarksPageViewModel();
             DataContextChanged += (s, e) => this.Bindings.Update();
+            BookmarksService.BookmarkAdded += BookmarksService_BookmarkAdded;
 
-            PopulateDesignModeBookmarks();
-
+            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled) PopulateDesignModeBookmarks();
+            else RestoreBookmarks();
         }
+
+        private void BookmarksService_BookmarkAdded(Bookmark bookmark)
+        {
+            ViewModel.Bookmarks.Insert(0, bookmark);
+        }
+
+        private async void RestoreBookmarks()
+        {
+            ViewModel.Bookmarks = new ObservableCollection<Bookmark>(await BookmarksService.GetBookmarks());
+        }
+
 
         private void PopulateDesignModeBookmarks()
         {
-            ViewModel.Bookmarks = new List<Bookmark>()
+            ViewModel.Bookmarks = new ObservableCollection<Bookmark>()
             {
                 new Bookmark()
                 {
@@ -87,6 +106,37 @@ namespace Pulse_Browser.Views
                      Icon = new BitmapImage() {UriSource = new Uri($"http://www.google.com/s2/favicons?domain=google.com")},
                 },
             };
+        }
+
+        private void Bookmark_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (!(sender is Grid fromElement)) return;
+            if (!(fromElement.DataContext is Bookmark dataContext)) return;
+
+            if (dataContext.Uri is null)
+            {
+                BookmarksService.ShowAddBookmarkDialog();
+            }
+            else
+            {
+                MainShell.CurrentInstance.CurrentNavigationService.Navigate(dataContext.Uri);
+            }
+        }
+
+        private void Grid_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            if (!(sender is Grid fromElement)) return;
+
+            var StartHoverAnimationStoryboard = fromElement.Resources["StartHoverAnimation"] as Windows.UI.Xaml.Media.Animation.Storyboard;
+            StartHoverAnimationStoryboard.Begin();
+        }
+
+        private void Grid_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            if (!(sender is Grid fromElement)) return;
+
+            var HideHoverAnimationStoryboard = fromElement.Resources["HideHoverAnimation"] as Windows.UI.Xaml.Media.Animation.Storyboard;
+            HideHoverAnimationStoryboard.Begin();
         }
     }
 }
