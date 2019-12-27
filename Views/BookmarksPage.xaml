@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:services="using:Pulse_Browser.Services"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:Helpers="using:Pulse_Browser.Helpers"
     xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
     xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
@@ -71,7 +72,10 @@
                                     </TransformGroup>
                                 </Border.RenderTransform>
                                 <Border Background="White" CornerRadius="100">
-                                    <Image Height="75" Source="{x:Bind Icon, Mode=OneWay}" />
+                                    <Grid Height="75" Width="75">
+                                        <Image x:Load="{x:Bind Helpers:Converters.IsDefined(Icon)}" x:Name="BookmarkIcon" Source="{x:Bind Icon, Mode=OneWay}" />
+                                        <FontIcon x:Name="NewBookmarkFontIcon" x:Load="{x:Bind Helpers:Converters.IsNotDefined(Icon)}" FontSize="36" FontFamily="Segoe MDL2 Assets" Glyph="&#xE109;" />
+                                    </Grid>
                                 </Border>
                             </Border>
                         </controls:DropShadowPanel>
