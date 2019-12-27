@@ -36,7 +36,7 @@ namespace Pulse_Browser.Services
         public static async Task AddBookmark(Bookmark bookmark, int index)
         {
             List<Bookmark> Bookmarks = (await Helpers.Storage.GetLocalClass<List<Bookmark>>("SavedBookmarks")) ?? DefaultBookmarks;
-            Bookmarks.Insert(0, bookmark);
+            Bookmarks.Insert(index, bookmark);
 
             await Helpers.Storage.StoreLocalClass("Bookmarks", Bookmarks);
             BookmarkAdded?.Invoke(bookmark);
