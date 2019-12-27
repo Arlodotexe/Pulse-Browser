@@ -88,5 +88,13 @@ namespace Pulse_Browser.Views
                 },
             };
         }
+
+        private void Bookmark_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (!(sender is Grid fromElement)) return;
+            if (!(fromElement.DataContext is Bookmark dataContext)) return;
+
+            MainShell.CurrentInstance.CurrentNavigationService.Navigate(dataContext.Uri);
+        }
     }
 }
