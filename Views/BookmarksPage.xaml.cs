@@ -57,7 +57,7 @@ namespace Pulse_Browser.Views
 
         private void BookmarksService_BookmarkAdded(Bookmark bookmark)
         {
-            ViewModel.Bookmarks.Add(bookmark);
+            ViewModel.Bookmarks.Insert(0, bookmark);
         }
 
         private async void RestoreBookmarks()
@@ -122,7 +122,6 @@ namespace Pulse_Browser.Views
                 MainShell.CurrentInstance.CurrentNavigationService.Navigate(dataContext.Uri);
             }
         }
-
 
         private void Grid_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
