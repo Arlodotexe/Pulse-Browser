@@ -16,9 +16,9 @@ namespace Pulse_Browser.Services
 
     public static class BookmarksService
     {
-        public static async Task<List<Bookmark>> GetBookmarks()
+        public static async Task<IEnumerable<Bookmark>> GetBookmarks()
         {
-            List<Bookmark> Bookmarks = (await Helpers.Storage.GetLocalClass<List<Bookmark>>("SavedBookmarks")) ?? DefaultBookmarks;
+            IEnumerable<Bookmark> Bookmarks = (await Helpers.Storage.GetLocalClass<IEnumerable<Bookmark>>("SavedBookmarks")) ?? DefaultBookmarks;
 
             return Bookmarks;
         }
