@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -44,7 +45,34 @@ namespace Pulse_Browser.Views
             DataContextChanged += (s, e) => this.Bindings.Update();
 
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled) PopulateDesignModeBookmarks();
+            else RestoreBookmarks();
         }
+
+        private async void RestoreBookmarks()
+        {
+            var Bookmarks = await Helpers.Storage.GetLocalClass<List<Bookmark>>("SavedBookmarks") ?? DefaultBookmarks;
+
+            ViewModel.Bookmarks = Bookmarks;
+        }
+
+        private List<Bookmark> DefaultBookmarks = new List<Bookmark>()
+        {
+            new Bookmark()
+            {
+                Uri = new Uri("https://google.com/"),
+                Icon = new BitmapImage() {UriSource = new Uri($"http://www.google.com/s2/favicons?domain=google.com")},
+            },
+            new Bookmark()
+            {
+                Uri = new Uri("https://linkedin.com/"),
+                Icon = new BitmapImage() {UriSource = new Uri($"http://www.google.com/s2/favicons?domain=linkedin.com")},
+            },
+            new Bookmark()
+            {
+                Uri = new Uri("https://youtube.com/"),
+                Icon = new BitmapImage() {UriSource = new Uri($"http://www.google.com/s2/favicons?domain=youtube.com")},
+            }
+        };
 
         private void PopulateDesignModeBookmarks()
         {
