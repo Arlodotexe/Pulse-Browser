@@ -16,7 +16,8 @@ namespace Pulse_Browser.Helpers
     {
         public static readonly ContentDialog CurrentDialog = new ContentDialog()
         {
-            CloseButtonText = "Close"
+            CloseButtonText = "Close",
+            CloseButtonCommand = new GalaSoft.MvvmLight.Command.RelayCommand(() => { Hide(); })
         };
 
         public static bool IsOpen = false;
@@ -28,10 +29,8 @@ namespace Pulse_Browser.Helpers
             var PrefferedTheme = SettingsService.GetLocal<ElementTheme>(SettingKeys.PrefferedTheme);
             CurrentDialog.RequestedTheme = PrefferedTheme;
 
-            if (!IsOpen)
-            {
-                await CurrentDialog.ShowAsync();
-            }
+            IsOpen = true;
+            await CurrentDialog.ShowAsync();
         }
 
         public static async Task OpenDialogAsync(FrameworkElement content)
@@ -41,15 +40,14 @@ namespace Pulse_Browser.Helpers
             var PrefferedTheme = SettingsService.GetLocal<ElementTheme>(SettingKeys.PrefferedTheme);
             CurrentDialog.RequestedTheme = PrefferedTheme;
 
-            if (!IsOpen)
-            {
-                await CurrentDialog.ShowAsync();
-            }
+            IsOpen = true;
+            await CurrentDialog.ShowAsync();
         }
 
         public static void Hide()
         {
             CurrentDialog.Hide();
+            IsOpen = false;
         }
     }
 }
