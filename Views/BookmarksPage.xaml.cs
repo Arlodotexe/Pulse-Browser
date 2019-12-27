@@ -43,8 +43,7 @@ namespace Pulse_Browser.Views
             DataContext = new BookmarksPageViewModel();
             DataContextChanged += (s, e) => this.Bindings.Update();
 
-            PopulateDesignModeBookmarks();
-
+            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled) PopulateDesignModeBookmarks();
         }
 
         private void PopulateDesignModeBookmarks()
