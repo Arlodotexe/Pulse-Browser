@@ -43,9 +43,15 @@ namespace Pulse_Browser.Views
             this.InitializeComponent();
             DataContext = new BookmarksPageViewModel();
             DataContextChanged += (s, e) => this.Bindings.Update();
+            BookmarksService.BookmarkAdded += BookmarksService_BookmarkAdded;
 
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled) PopulateDesignModeBookmarks();
             else RestoreBookmarks();
+        }
+
+        private void BookmarksService_BookmarkAdded(Bookmark bookmark)
+        {
+            ViewModel.Bookmarks.Insert(0, bookmark);
         }
 
         private async void RestoreBookmarks()
