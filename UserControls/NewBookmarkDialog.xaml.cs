@@ -51,6 +51,7 @@ namespace Pulse_Browser.UserControls
             };
 
             await Services.BookmarksService.AddBookmark(newBookmark);
+            Helpers.AppContentDialog.Hide();
         }
     }
 }
