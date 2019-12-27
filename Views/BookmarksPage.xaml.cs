@@ -113,7 +113,14 @@ namespace Pulse_Browser.Views
             if (!(sender is Grid fromElement)) return;
             if (!(fromElement.DataContext is Bookmark dataContext)) return;
 
-            MainShell.CurrentInstance.CurrentNavigationService.Navigate(dataContext.Uri);
+            if (dataContext.Uri is null)
+            {
+                BookmarksService.ShowAddBookmarkDialog();
+            }
+            else
+            {
+                MainShell.CurrentInstance.CurrentNavigationService.Navigate(dataContext.Uri);
+            }
         }
 
 

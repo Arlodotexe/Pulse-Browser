@@ -23,6 +23,11 @@ namespace Pulse_Browser.Services
             return Bookmarks;
         }
 
+        public static void ShowAddBookmarkDialog()
+        {
+            Helpers.AppContentDialog.OpenDialog(new UserControls.NewBookmarkDialog());
+        }
+
         public static async Task AddBookmark(Bookmark bookmark)
         {
             await AddBookmark(bookmark, 0);
