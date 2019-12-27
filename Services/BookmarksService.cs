@@ -34,6 +34,7 @@ namespace Pulse_Browser.Services
             Bookmarks.Insert(0, bookmark);
 
             await Helpers.Storage.StoreLocalClass("Bookmarks", Bookmarks);
+            BookmarkAdded?.Invoke(bookmark);
         }
 
         private static List<Bookmark> DefaultBookmarks = new List<Bookmark>()
@@ -54,5 +55,8 @@ namespace Pulse_Browser.Services
                 Icon = new BitmapImage() {UriSource = new Uri($"http://www.google.com/s2/favicons?domain=youtube.com")},
             }
         };
+
+        public delegate void BookmarkAddedEvent(Bookmark bookmark);
+        public static event BookmarkAddedEvent BookmarkAdded;
     }
 }
