@@ -96,5 +96,21 @@ namespace Pulse_Browser.Views
 
             MainShell.CurrentInstance.CurrentNavigationService.Navigate(dataContext.Uri);
         }
+
+        private void Grid_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            if (!(sender is Grid fromElement)) return;
+
+            var StartHoverAnimationStoryboard = fromElement.Resources["StartHoverAnimation"] as Windows.UI.Xaml.Media.Animation.Storyboard;
+            StartHoverAnimationStoryboard.Begin();
+        }
+
+        private void Grid_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            if (!(sender is Grid fromElement)) return;
+
+            var HideHoverAnimationStoryboard = fromElement.Resources["HideHoverAnimation"] as Windows.UI.Xaml.Media.Animation.Storyboard;
+            HideHoverAnimationStoryboard.Begin();
+        }
     }
 }

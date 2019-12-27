@@ -7,6 +7,8 @@
     xmlns:services="using:Pulse_Browser.Services"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
+    xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     mc:Ignorable="d"
     Background="{ThemeResource SystemControlAltMediumLowAcrylicWindowMediumBrush}">
 
@@ -24,14 +26,52 @@
             </GridView.ItemContainerStyle>
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="services:Bookmark">
-                    <Grid CornerRadius="100" Tapped="Bookmark_Tapped" extensions:Mouse.Cursor="Hand">
+                    <Grid CornerRadius="100" Tapped="Bookmark_Tapped" extensions:Mouse.Cursor="Hand" PointerEntered="Grid_PointerEntered" PointerExited="Grid_PointerExited">
+                        <Grid.Resources>
+                            <ResourceDictionary>
+                                <Storyboard x:Name="StartHoverAnimation">
+                                    <DoubleAnimation Storyboard.TargetName="BookmarkImageScale" Storyboard.TargetProperty="ScaleX"
+                                 Duration="0:0:0.3" From="1" To="1.44">
+                                        <DoubleAnimation.EasingFunction>
+                                            <CubicEase/>
+                                        </DoubleAnimation.EasingFunction>
+                                    </DoubleAnimation>
+                                    <DoubleAnimation Storyboard.TargetName="BookmarkImageScale" Storyboard.TargetProperty="ScaleY"
+                                 Duration="0:0:0.3" From="1" To="1.44">
+                                        <DoubleAnimation.EasingFunction>
+                                            <CubicEase/>
+                                        </DoubleAnimation.EasingFunction>
+                                    </DoubleAnimation>
+
+                                </Storyboard>
+                                <Storyboard x:Name="HideHoverAnimation">
+                                    <DoubleAnimation Storyboard.TargetName="BookmarkImageScale" Storyboard.TargetProperty="ScaleX"
+                                 Duration="0:0:0.3" From="1.44" To="1">
+                                        <DoubleAnimation.EasingFunction>
+                                            <CircleEase/>
+                                        </DoubleAnimation.EasingFunction>
+                                    </DoubleAnimation>
+                                    <DoubleAnimation Storyboard.TargetName="BookmarkImageScale" Storyboard.TargetProperty="ScaleY"
+                                 Duration="0:0:0.3" From="1.44" To="1">
+                                        <DoubleAnimation.EasingFunction>
+                                            <CircleEase/>
+                                        </DoubleAnimation.EasingFunction>
+                                    </DoubleAnimation>
+                                </Storyboard>
+                            </ResourceDictionary>
+                        </Grid.Resources>
                         <controls:DropShadowPanel HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"  Margin="0,0,7,8" CornerRadius="100" OffsetY="8" OffsetX="7" BlurRadius="5" ShadowOpacity="0.3" Color="Black">
-                        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White" CornerRadius="100" Padding="10">
-                            <Border Background="White" CornerRadius="100">
-                                <Image Height="75" Source="{x:Bind Icon, Mode=OneWay}" />
+                            <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White" CornerRadius="100" Padding="10" RenderTransformOrigin="0.45,0.45">
+                                <Border.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform x:Name="BookmarkImageScale"/>
+                                    </TransformGroup>
+                                </Border.RenderTransform>
+                                <Border Background="White" CornerRadius="100">
+                                    <Image Height="75" Source="{x:Bind Icon, Mode=OneWay}" />
+                                </Border>
                             </Border>
-                        </Border>
-                    </controls:DropShadowPanel>
+                        </controls:DropShadowPanel>
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
