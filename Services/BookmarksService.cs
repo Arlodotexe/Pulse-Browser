@@ -38,7 +38,7 @@ namespace Pulse_Browser.Services
             List<Bookmark> Bookmarks = (await Helpers.Storage.GetLocalClass<List<Bookmark>>("SavedBookmarks")) ?? DefaultBookmarks;
             Bookmarks.Insert(index, bookmark);
 
-            await Helpers.Storage.StoreLocalClass("Bookmarks", Bookmarks);
+            await Helpers.Storage.StoreLocalClass("SavedBookmarks", Bookmarks);
             BookmarkAdded?.Invoke(bookmark);
         }
 
