@@ -50,29 +50,9 @@ namespace Pulse_Browser.Views
 
         private async void RestoreBookmarks()
         {
-            var Bookmarks = await Helpers.Storage.GetLocalClass<List<Bookmark>>("SavedBookmarks") ?? DefaultBookmarks;
-
-            ViewModel.Bookmarks = Bookmarks;
+            ViewModel.Bookmarks = await BookmarksService.GetBookmarks();
         }
 
-        private List<Bookmark> DefaultBookmarks = new List<Bookmark>()
-        {
-            new Bookmark()
-            {
-                Uri = new Uri("https://google.com/"),
-                Icon = new BitmapImage() {UriSource = new Uri($"http://www.google.com/s2/favicons?domain=google.com")},
-            },
-            new Bookmark()
-            {
-                Uri = new Uri("https://linkedin.com/"),
-                Icon = new BitmapImage() {UriSource = new Uri($"http://www.google.com/s2/favicons?domain=linkedin.com")},
-            },
-            new Bookmark()
-            {
-                Uri = new Uri("https://youtube.com/"),
-                Icon = new BitmapImage() {UriSource = new Uri($"http://www.google.com/s2/favicons?domain=youtube.com")},
-            }
-        };
 
         private void PopulateDesignModeBookmarks()
         {
@@ -122,6 +102,12 @@ namespace Pulse_Browser.Views
             if (!(fromElement.DataContext is Bookmark dataContext)) return;
 
             MainShell.CurrentInstance.CurrentNavigationService.Navigate(dataContext.Uri);
+        }
+
+        private async void AddNewBookmark(Bookmark bookmark)
+        {
+            ViewModel.Bookmarks.Insert(0, bookmark);
+            await BookmarksService.AddBookmark(bookmark);
         }
 
         private void Grid_PointerEntered(object sender, PointerRoutedEventArgs e)

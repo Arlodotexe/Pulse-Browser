@@ -18,18 +18,41 @@ namespace Pulse_Browser.Services
     {
         public static async Task<List<Bookmark>> GetBookmarks()
         {
-            List<Bookmark> Bookmarks = (await Helpers.Storage.GetLocalClass<IEnumerable<Bookmark>>("Bookmarks"))?.ToList() ?? new List<Bookmark>();
+            List<Bookmark> Bookmarks = (await Helpers.Storage.GetLocalClass<List<Bookmark>>("SavedBookmarks")) ?? DefaultBookmarks;
 
             return Bookmarks;
         }
 
-        public static async void AddBookmark(Bookmark bookmark)
+        public static async Task AddBookmark(Bookmark bookmark)
         {
-            List<Bookmark> Bookmarks = (await Helpers.Storage.GetLocalClass<IEnumerable<Bookmark>>("Bookmarks"))?.ToList() ?? new List<Bookmark>();
+            await AddBookmark(bookmark, 0);
+        }
 
-            Bookmarks.Add(bookmark);
+        public static async Task AddBookmark(Bookmark bookmark, int index)
+        {
+            List<Bookmark> Bookmarks = (await Helpers.Storage.GetLocalClass<List<Bookmark>>("SavedBookmarks")) ?? DefaultBookmarks;
+            Bookmarks.Insert(0, bookmark);
 
             await Helpers.Storage.StoreLocalClass("Bookmarks", Bookmarks);
         }
+
+        private static List<Bookmark> DefaultBookmarks = new List<Bookmark>()
+        {
+            new Bookmark()
+            {
+                Uri = new Uri("https://google.com/"),
+                Icon = new BitmapImage() {UriSource = new Uri($"http://www.google.com/s2/favicons?domain=google.com")},
+            },
+            new Bookmark()
+            {
+                Uri = new Uri("https://linkedin.com/"),
+                Icon = new BitmapImage() {UriSource = new Uri($"http://www.google.com/s2/favicons?domain=linkedin.com")},
+            },
+            new Bookmark()
+            {
+                Uri = new Uri("https://youtube.com/"),
+                Icon = new BitmapImage() {UriSource = new Uri($"http://www.google.com/s2/favicons?domain=youtube.com")},
+            }
+        };
     }
 }
