@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:services="using:Pulse_Browser.Services"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
     mc:Ignorable="d"
     Background="{ThemeResource SystemControlAltMediumLowAcrylicWindowMediumBrush}">
 
@@ -23,7 +24,7 @@
             </GridView.ItemContainerStyle>
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="services:Bookmark">
-                    <Grid CornerRadius="100" Tapped="Bookmark_Tapped">
+                    <Grid CornerRadius="100" Tapped="Bookmark_Tapped" extensions:Mouse.Cursor="Hand">
                         <controls:DropShadowPanel HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"  Margin="0,0,7,8" CornerRadius="100" OffsetY="8" OffsetX="7" BlurRadius="5" ShadowOpacity="0.3" Color="Black">
                         <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White" CornerRadius="100" Padding="10">
                             <Border Background="White" CornerRadius="100">
