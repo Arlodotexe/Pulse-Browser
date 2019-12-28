@@ -21,7 +21,7 @@ namespace Pulse_Browser.UserControls
 {
     public class WebXamlViewViewModel : ViewModelBase
     {
-        private Uri currentAddress = new Uri("about:home");
+        private Uri currentAddress;
         private bool webViewShown = false;
 
         public Uri CurrentWebAddress
