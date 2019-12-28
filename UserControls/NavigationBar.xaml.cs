@@ -36,7 +36,7 @@ namespace Pulse_Browser.UserControls
         private DependencyProperty AddressBarTextProperty = DependencyProperty.Register(
           "AddressBarText",
           typeof(string),
-          typeof(string),
+          typeof(NavigationBar),
           new PropertyMetadata(null)
         );
 
@@ -49,7 +49,7 @@ namespace Pulse_Browser.UserControls
         private DependencyProperty BackButtonEnabledProperty = DependencyProperty.Register(
           "BackButtonEnabled",
           typeof(bool),
-          typeof(bool),
+          typeof(NavigationBar),
           new PropertyMetadata(null)
         );
 
@@ -62,7 +62,7 @@ namespace Pulse_Browser.UserControls
         private DependencyProperty ForwardButtonEnabledProperty = DependencyProperty.Register(
           "ForwardButtonEnabled",
           typeof(bool),
-          typeof(bool),
+          typeof(NavigationBar),
           new PropertyMetadata(null)
         );
 
