@@ -10,6 +10,6 @@
 
     <Grid>
         <Frame x:Name="AppFrame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-        <WebView x:Name="AppWebView" NavigationCompleted="AppWebView_NavigationCompleted" Visibility="{x:Bind helpers:Converters.BooleanToVisibility(ViewModel.WebViewShown), Mode=OneWay}" Source="{x:Bind ViewModel.CurrentWebAddress, Mode=TwoWay}" />
+        <WebView x:Name="AppWebView" NavigationStarting="AppWebView_NavigationStarting" NavigationCompleted="AppWebView_NavigationCompleted" x:Load="{x:Bind ViewModel.WebViewShown, Mode=OneWay}" Visibility="{x:Bind helpers:Converters.BooleanToVisibility(ViewModel.WebViewShown), Mode=OneWay}" Source="{x:Bind ViewModel.CurrentWebAddress, Mode=TwoWay}" />
     </Grid>
 </UserControl>

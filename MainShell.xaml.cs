@@ -109,14 +109,12 @@ namespace Pulse_Browser
             CurrentNavigationService = XamlWebViewer.NavigationService;
             CurrentNavigationService.CanGoBackChanged += CurrentNavigationService_CanGoBackChanged;
             CurrentNavigationService.CanGoForwardChanged += CurrentNavigationService_CanGoForwardChanged;
-            WebXamlView.WebView.NavigationStarting += WebView_NavigationStarting;
+
+            WebXamlView.NavigationStarting += WebView_NavigationStarting;
             CurrentNavigationService.NavigationRequested += CurrentNavigationService_NavigationRequested;
         }
 
-        private void WebView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
-        {
-            ViewModel.AddressBarText = args.Uri.ToString();
-        }
+        private void WebView_NavigationStarting(Uri uri) => ViewModel.AddressBarText = uri.ToString();
 
         private void CurrentNavigationService_NavigationRequested(NavigationEntry navigationEntry)
         {
