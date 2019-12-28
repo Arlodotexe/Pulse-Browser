@@ -15,6 +15,7 @@ namespace Pulse_Browser
     {
         private bool backButtonEnabled = false;
         private bool forwardButtonEnabled = false;
+        private string addressBarText = "";
 
         public bool BackButtonEnabled
         {
@@ -26,6 +27,12 @@ namespace Pulse_Browser
         {
             get => forwardButtonEnabled;
             set => Set(() => ForwardButtonEnabled, ref forwardButtonEnabled, value);
+        }
+
+        public string AddressBarText
+        {
+            get => addressBarText;
+            set => Set(() => AddressBarText, ref addressBarText, value);
         }
     }
 
@@ -56,7 +63,7 @@ namespace Pulse_Browser
             // Set active window colors
             titleBar.ForegroundColor = titleBar.ButtonForegroundColor = Windows.UI.Colors.White;
             titleBar.BackgroundColor = titleBar.ButtonBackgroundColor = Windows.UI.Color.FromArgb(255, 0, 120, 215);
-            
+
         }
 
         private void SetupDefaultViewModel() => DataContext = new MainShellViewModel();
@@ -102,6 +109,27 @@ namespace Pulse_Browser
             CurrentNavigationService = XamlWebViewer.NavigationService;
             CurrentNavigationService.CanGoBackChanged += CurrentNavigationService_CanGoBackChanged;
             CurrentNavigationService.CanGoForwardChanged += CurrentNavigationService_CanGoForwardChanged;
+            WebXamlView.WebView.NavigationStarting += WebView_NavigationStarting;
+            CurrentNavigationService.NavigationRequested += CurrentNavigationService_NavigationRequested;
+        }
+
+        private void WebView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
+        {
+            ViewModel.AddressBarText = args.Uri.ToString();
+        }
+
+        private void CurrentNavigationService_NavigationRequested(NavigationEntry navigationEntry)
+        {
+            switch (navigationEntry.Kind)
+            {
+                case NavigationPageType.Web:
+                    break;
+                case NavigationPageType.Native:
+                    ViewModel.AddressBarText = null;
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
         }
 
         private void CurrentNavigationService_CanGoForwardChanged(bool canGoForward) => ViewModel.ForwardButtonEnabled = canGoForward;
