@@ -74,7 +74,7 @@
                                 <Border Background="White" CornerRadius="100">
                                     <Grid Height="75" Width="75">
                                         <Image x:Load="{x:Bind Helpers:Converters.IsDefined(Icon)}" x:Name="BookmarkIcon" Source="{x:Bind Icon, Mode=OneWay}" />
-                                        <FontIcon x:Name="NewBookmarkFontIcon" x:Load="{x:Bind Helpers:Converters.IsNotDefined(Icon)}" FontSize="36" FontFamily="Segoe MDL2 Assets" Glyph="&#xE109;" />
+                                        <FontIcon x:Name="NewBookmarkFontIcon" x:Load="{x:Bind Helpers:Converters.IsNotDefined(Icon)}" FontSize="36" FontFamily="Segoe MDL2 Assets" Foreground="Black" Glyph="&#xE109;" />
                                     </Grid>
                                 </Border>
                             </Border>
