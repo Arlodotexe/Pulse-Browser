@@ -89,6 +89,9 @@ namespace Pulse_Browser.UserControls
             }
         }
 
+        public delegate void NavigationStartingEvent(Uri uri);
+        public event NavigationStartingEvent NavigationStarting;
+
         private void NavigationService_CanGoBackChanged(bool canGoBack) => _canGoBack = canGoBack;
         private void NavigationService_CanGoForwardChanged(bool canGoForward) => _canGoForward = canGoForward;
         private void NavigationService_NavigationRequested(NavigationEntry navigationEntry) => Navigate(navigationEntry);
@@ -117,5 +120,7 @@ namespace Pulse_Browser.UserControls
                 });
             }
         }
+
+        private void AppWebView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args) => NavigationStarting?.Invoke(args.Uri);
     }
 }
