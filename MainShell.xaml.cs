@@ -150,7 +150,7 @@ namespace Pulse_Browser
 
         private void NavigationBar_FavoritesMenuItemButtonClicked()
         {
-            Helpers.AppContentDialog.OpenDialog(new UserControls.Options());
+            Helpers.AppContentDialog.OpenDialog(new UserControls.NewBookmarkDialog());
         }
 
         private void NavigationBar_SettingsMenuFlyoutItemButtonClicked()
