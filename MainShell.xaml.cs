@@ -150,7 +150,8 @@ namespace Pulse_Browser
 
         private void NavigationBar_FavoritesMenuItemButtonClicked()
         {
-            Helpers.AppContentDialog.OpenDialog(new UserControls.NewBookmarkDialog());
+            if (string.IsNullOrEmpty(ViewModel?.AddressBarText)) Helpers.AppContentDialog.OpenDialog(new UserControls.NewBookmarkDialog());
+            else Helpers.AppContentDialog.OpenDialog(new UserControls.NewBookmarkDialog(new Uri(ViewModel.AddressBarText)));
         }
 
         private void NavigationBar_SettingsMenuFlyoutItemButtonClicked()
