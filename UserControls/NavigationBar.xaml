@@ -294,7 +294,7 @@
             <FontIcon FontSize="18" FontFamily="Segoe MDL2 Assets" Glyph="&#xE80F;" />
         </Button>
 
-        <AutoSuggestBox QuerySubmitted="AutoSuggestBox_QuerySubmitted" Style="{StaticResource NavigationBox}" Text="{x:Bind AddressBarText, Mode=TwoWay}" Grid.Column="4" PlaceholderText="Search or enter a web address" VerticalAlignment="Center" Margin="20,0,20,0" />
+        <AutoSuggestBox QuerySubmitted="AutoSuggestBox_QuerySubmitted" Style="{StaticResource NavigationBox}" Text="{Binding AddressBarText}" Grid.Column="4" PlaceholderText="Search or enter a web address" VerticalAlignment="Center" Margin="20,0,20,0" />
 
 
         <Button Width="40" Height="40" Grid.Column="5" Style="{StaticResource TransparentSquareButton}" Click="FavoritesButton_Click">
