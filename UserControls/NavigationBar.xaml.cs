@@ -21,10 +21,24 @@ namespace Pulse_Browser.UserControls
 {
     public sealed partial class NavigationBar : UserControl
     {
+
         public NavigationBar()
         {
             this.InitializeComponent();
         }
+
+        public string AddressBarText
+        {
+            get { return (string)GetValue(AddressBarTextProperty); }
+            set { SetValue(AddressBarTextProperty, value); }
+        }
+
+        private DependencyProperty AddressBarTextProperty = DependencyProperty.Register(
+          "AddressBarText",
+          typeof(string),
+          typeof(string),
+          new PropertyMetadata(null)
+        );
 
         public bool BackButtonEnabled
         {
