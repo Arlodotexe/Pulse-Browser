@@ -37,6 +37,13 @@ namespace Pulse_Browser.UserControls
             DataContextChanged += (s, e) => this.Bindings.Update();
         }
 
+        public NewBookmarkDialog(Uri bookmarkUri)
+        {
+            this.InitializeComponent();
+            DataContext = new NewBookmarkDialogViewModel() { Uri = bookmarkUri.ToString() } ;
+            DataContextChanged += (s, e) => this.Bindings.Update();
+        }
+
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             if (!Uri.TryCreate(ViewModel.Uri, UriKind.RelativeOrAbsolute, out Uri newUri)) return;
