@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
 
         <controls:DropShadowPanel Canvas.ZIndex="1" Color="Black" ShadowOpacity="0.45" BlurRadius="25" OffsetY="3" HorizontalContentAlignment="Stretch">
-            <usercontrols:NavigationBar BackButtonClicked="NavigationBar_BackButtonClicked" 
+            <usercontrols:NavigationBar AddressBarText="{x:Bind ViewModel.AddressBarText, Mode=OneWay}" BackButtonClicked="NavigationBar_BackButtonClicked" 
                                         HomeButtonClicked="NavigationBar_HomeButtonClicked" ForwardButtonClicked="NavigationBar_ForwardButtonClicked" RefreshButtonClicked="NavigationBar_RefreshButtonClicked" NavigationQuerySubmitted="NavigationBar_NavigationQuerySubmitted" BackButtonEnabled="{x:Bind ViewModel.BackButtonEnabled, Mode=OneWay}" ForwardButtonEnabled="{x:Bind ViewModel.ForwardButtonEnabled, Mode=OneWay}" HistoryMenuFlyoutItemButtonClicked="NavigationBar_HistoryMenuFlyoutItemButtonClicked" FavoritesMenuItemButtonClicked="NavigationBar_FavoritesMenuItemButtonClicked" SettingsMenuFlyoutItemButtonClicked="NavigationBar_SettingsMenuFlyoutItemButtonClicked" />
         </controls:DropShadowPanel>
 

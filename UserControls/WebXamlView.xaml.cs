@@ -41,6 +41,9 @@ namespace Pulse_Browser.UserControls
         private WebXamlViewViewModel ViewModel => DataContext as WebXamlViewViewModel;
         public NavigationService NavigationService = new NavigationService();
 
+        public WebView WebView;
+        public Frame Frame;
+
         private bool _canGoBack = false;
         private bool _canGoForward = false;
         public bool CanGoBack { get => _canGoBack; }
@@ -51,6 +54,9 @@ namespace Pulse_Browser.UserControls
             this.InitializeComponent();
             SetupDefaultViewModel();
             SetupNavigationService();
+
+            this.WebView = AppWebView;
+            this.Frame = AppFrame;
 
             DataContextChanged += (s, e) => this.Bindings.Update();
 

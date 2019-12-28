@@ -254,7 +254,7 @@
                                     <VisualState x:Name="Portrait"/>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            <TextBox x:Name="TextBox" ScrollViewer.BringIntoViewOnFocusChange="False" Description="{TemplateBinding Description}" DesiredCandidateWindowAlignment="BottomEdge" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Header="{TemplateBinding Header}" Margin="0" PlaceholderText="{TemplateBinding PlaceholderText}" Style="{TemplateBinding TextBoxStyle}" UseSystemFocusVisuals="{TemplateBinding UseSystemFocusVisuals}" Width="{TemplateBinding Width}" Canvas.ZIndex="0"/>
+                            <TextBox x:Name="TextBox" ScrollViewer.BringIntoViewOnFocusChange="False" Description="{TemplateBinding Description}" DesiredCandidateWindowAlignment="BottomEdge" Background="{ThemeResource SystemChromeAltHighColor}" Header="{TemplateBinding Header}" Margin="0" PlaceholderText="{TemplateBinding PlaceholderText}" Style="{TemplateBinding TextBoxStyle}" UseSystemFocusVisuals="{TemplateBinding UseSystemFocusVisuals}" Width="{TemplateBinding Width}" Canvas.ZIndex="0"/>
                             <Popup x:Name="SuggestionsPopup">
                                 <Border x:Name="SuggestionsContainer">
                                     <ListView x:Name="SuggestionsList" Background="{ThemeResource AutoSuggestBoxSuggestionsListBackground}" BorderThickness="{ThemeResource AutoSuggestListBorderThemeThickness}" BorderBrush="{ThemeResource AutoSuggestBoxSuggestionsListBorderBrush}" DisplayMemberPath="{TemplateBinding DisplayMemberPath}" ItemContainerStyle="{TemplateBinding ItemContainerStyle}" ItemTemplate="{TemplateBinding ItemTemplate}" IsItemClickEnabled="True" ItemTemplateSelector="{TemplateBinding ItemTemplateSelector}" MaxHeight="{ThemeResource AutoSuggestListMaxHeight}" Margin="{ThemeResource AutoSuggestListMargin}" Padding="{ThemeResource AutoSuggestListPadding}"/>
@@ -294,7 +294,7 @@
             <FontIcon FontSize="18" FontFamily="Segoe MDL2 Assets" Glyph="&#xE80F;" />
         </Button>
 
-        <AutoSuggestBox QuerySubmitted="AutoSuggestBox_QuerySubmitted" Style="{StaticResource NavigationBox}" Grid.Column="4" PlaceholderText="Search or enter a web address" VerticalAlignment="Center" Margin="20,0,20,0" />
+        <AutoSuggestBox QuerySubmitted="AutoSuggestBox_QuerySubmitted" Style="{StaticResource NavigationBox}" Text="{Binding AddressBarText}" Grid.Column="4" PlaceholderText="Search or enter a web address" VerticalAlignment="Center" Margin="20,0,20,0" />
 
 
         <Button Width="40" Height="40" Grid.Column="5" Style="{StaticResource TransparentSquareButton}" Click="FavoritesButton_Click">
